@@ -1,6 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,11 +32,10 @@ public class AboutMe {
 	@Column(name = "description")
 	private String description;
 	
-	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "portfolio_id")
     private Portfolio portfolio;
 	
 	@OneToMany(mappedBy = "aboutMe")
-	private List<AboutMeItem> aboutMeItems;
+	private Set<AboutMeItem> aboutMeItems;
 }

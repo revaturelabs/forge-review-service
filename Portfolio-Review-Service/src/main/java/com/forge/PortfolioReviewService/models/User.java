@@ -1,6 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,11 +41,7 @@ public class User {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-	
 	@OneToMany(mappedBy = "myUser")
 	@JsonBackReference
-	private List<Portfolio> portfolios;
-	
-	
-
+	private Set<Portfolio> portfolios;
 }

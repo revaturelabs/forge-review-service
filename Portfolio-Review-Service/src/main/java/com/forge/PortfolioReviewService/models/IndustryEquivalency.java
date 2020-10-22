@@ -34,6 +34,4 @@ public class IndustryEquivalency {
 	@JoinColumn(name="portfolio_id", nullable=false)
 	@JsonBackReference
 	private Portfolio portfolio;
-	
-	
 }

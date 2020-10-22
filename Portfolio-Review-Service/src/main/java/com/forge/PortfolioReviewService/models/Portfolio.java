@@ -1,6 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,18 +47,17 @@ public class Portfolio {
 
 	@OneToMany(mappedBy = "portfolio")
 	@JsonBackReference
-	private List<Project> projects;
+	private Set<Project> projects;
 	
 	@OneToMany(mappedBy = "portfolio")
 	@JsonBackReference
-	private List<Education> education;
+	private Set<Education> education;
 	
 	@OneToMany(mappedBy = "portfolio")
 	@JsonBackReference
-	private List<SkillMatrix> skillMatrix;
+	private Set<SkillMatrix> skillMatrix;
 	
 	@OneToMany(mappedBy = "portfolio")
 	@JsonBackReference
-	private List<IndustryEquivalency> industryEquivalency;
-
+	private Set<IndustryEquivalency> industryEquivalency;
 }
