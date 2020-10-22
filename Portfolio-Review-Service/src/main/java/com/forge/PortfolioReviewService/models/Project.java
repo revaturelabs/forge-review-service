@@ -1,6 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,8 +42,8 @@ public class Project {
 	private Portfolio portfolio;
 	
 	@OneToMany(mappedBy = "project")
-	private Set<ProjectResponsibilities> projectResponsibilities;
+	private List<ProjectResponsibilities> projectResponsibilities;
 	
 	@OneToMany(mappedBy = "project")
-	private Set<ProjectTechnologies> projectTechnologies;
+	private List<ProjectTechnologies> projectTechnologies;
 }

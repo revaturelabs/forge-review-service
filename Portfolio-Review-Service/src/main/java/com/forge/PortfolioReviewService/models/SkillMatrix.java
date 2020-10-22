@@ -1,6 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,5 +36,5 @@ public class SkillMatrix {
 	private Portfolio portfolio;
 	
 	@OneToMany(mappedBy = "skillMatrix")
-	private Set<SkillMatrixItem> skillMatrixItem;
+	private List<SkillMatrixItem> skillMatrixItem;
 }
