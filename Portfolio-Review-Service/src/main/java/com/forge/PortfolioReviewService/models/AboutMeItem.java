@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +33,11 @@ public class AboutMeItem {
 	
 	@ManyToOne
 	@JoinColumn(name="about_me_id", nullable=false)
-	@JsonBackReference
+//	@JsonManagedReference(value="aboutMe")
 	private AboutMe aboutMe;
+	
+	@Override
+	public String toString() {
+		return "AboutMeItem [id=" + id + ", content=" + content + "]";
+	}
 }

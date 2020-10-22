@@ -10,10 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 
@@ -22,12 +23,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @Entity
 @Table(name = "User_Table")
+@EqualsAndHashCode(exclude = "portfolios")
 public class User {
 
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int UserId;
+	private int userId;
 	
 	@Column(name = "email")
 	private String email;
@@ -41,7 +43,11 @@ public class User {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
+	
 	@OneToMany(mappedBy = "myUser")
-	@JsonBackReference
+	@JsonManagedReference(value="myUser")
 	private Set<Portfolio> portfolios;
+	
+	
+
 }

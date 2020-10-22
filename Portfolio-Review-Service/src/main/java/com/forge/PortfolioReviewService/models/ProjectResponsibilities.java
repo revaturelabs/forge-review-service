@@ -32,6 +32,11 @@ public class ProjectResponsibilities {
 	
 	@ManyToOne
 	@JoinColumn(name="project_id", nullable=false)
-	@JsonBackReference
+	@JsonBackReference(value="responsibilitiesPortfolio")
 	private Project project;
+	
+	@Override
+	public String toString() {
+		return "ProjectResponsibilities [id=" + id + ", content=" + content + "]";
+	}
 }

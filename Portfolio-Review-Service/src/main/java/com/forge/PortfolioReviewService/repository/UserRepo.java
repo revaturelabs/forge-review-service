@@ -14,7 +14,7 @@ public interface UserRepo extends CrudRepository<User, Integer>{
 	
 	public List<User> findAll();
 	
-	//public User findByUserId(int id);
+	public User findByUserId(int id);
 	
 	public User findByFirstName(String firstName);
 	

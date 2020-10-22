@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.forge</groupId>
-	<artifactId>Portfolio-Generation-Service</artifactId>
+	<artifactId>Portfolio-Review-Service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Portfolio-Generation-Service</name>
+	<name>Portfolio-Review-Service</name>
 	<description>Demo project for Spring Boot</description>
 
 		<properties>
@@ -77,6 +77,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        
+        <!-- JACKSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+        
 	</dependencies>
 
 	<dependencyManagement>

@@ -32,6 +32,14 @@ public class IndustryEquivalency {
 	
 	@ManyToOne
 	@JoinColumn(name="portfolio_id", nullable=false)
-	@JsonBackReference
+	@JsonBackReference(value="industryPortfolio")
 	private Portfolio portfolio;
+
+	@Override
+	public String toString() {
+		return "IndustryEquivalency [id=" + id + ", months=" + months + ", technology=" + technology + "]";
+	}
+	
+	
+	
 }

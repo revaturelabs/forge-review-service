@@ -2,7 +2,6 @@ package com.forge.PortfolioReviewService.models;
 
 import java.util.Date;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,14 +15,16 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "education")
-//@EqualsAndHashCode(exclude = {"education"})
+@EqualsAndHashCode(exclude = {"portfolio"})
 public class Education {
 
 	@Id
@@ -48,7 +49,12 @@ public class Education {
 	
 	@ManyToOne
 	@JoinColumn(name="portfolio_id", nullable=false)
-	@JsonBackReference
+	@JsonBackReference(value="educationPortfolio")
 	private Portfolio portfolio;
 	
+	@Override
+	public String toString() {
+		return "Education [id=" + id + ", university=" + university + ", graduation=" + graduation + ", major=" + major
+				+ ", minor=" + minor + "]";
+	}
 }
