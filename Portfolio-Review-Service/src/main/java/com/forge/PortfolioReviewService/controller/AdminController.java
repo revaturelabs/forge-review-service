@@ -54,4 +54,11 @@ public class AdminController {
 		return userRepo.findByUserId(id);
 	}
 	
+	@PostMapping("/createUser")
+	public void saveUser(@RequestBody User u) {
+		System.out.println(u);
+		userRepo.save(u);
+		System.out.println("please");
+	}
+	
 }
