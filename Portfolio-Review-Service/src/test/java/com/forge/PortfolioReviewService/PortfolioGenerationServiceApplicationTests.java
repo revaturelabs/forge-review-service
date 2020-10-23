@@ -1,4 +1,4 @@
-package com.forge.PortfolioGenerationService;
+package com.forge.PortfolioReviewService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
