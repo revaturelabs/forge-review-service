@@ -33,7 +33,7 @@ public class EmailController {
 	public String sendEmail(@RequestBody Email email) {
 		
 		String body= "Hello, "+email.getUserFirstName()+ "." + "\n"+"\n"
-				+ "Your Porfolio number "+email.getPortfolioId()+" has been "+email.getPortfolioStatus().toLowerCase()+ ".";
+				+ "Your Portfolio number "+email.getPortfolioId()+" has been "+email.getPortfolioStatus().toLowerCase()+ ".";
 				
 				if (email.getFeedBack().length() > 0) {
 					body = body.concat(" Your reviewer has left the following feedback:" + "\n" + "\n" 
