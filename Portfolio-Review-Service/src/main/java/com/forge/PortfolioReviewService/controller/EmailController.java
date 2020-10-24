@@ -29,13 +29,20 @@ public class EmailController {
 //Email email= new Email("Ken","keeper@yahoo.com","Port", "Pending","Status of your portfolio, but has some errors need more skills for your matix", 2, "John");
 	@PostMapping(value="/sendEmail")
 	@ApiOperation(value="Sending an email to the respected person",
-				  notes = "Sending an email to inform the person of thier porfolio status")
+				  notes = "Sending an email to inform the person of their portfolio status")
 	public String sendEmail(@RequestBody Email email) {
 		
-		String body= "Hello, "+email.getUserFirstName()+"\n"+"\n"
-		+ "Your Porfolio number "+email.getPortfolioId()+" has been "+email.getPortfolioStatus()+ ". Your reviewer has left the following feedback: "+"\n"+"\n"
-				+email.getFeedBack()+"\n"+"\n"
-		+"Thanks for submitting your porfolio.";
+		String body= "Hello, "+email.getUserFirstName()+ "." + "\n"+"\n"
+				+ "Your Porfolio number "+email.getPortfolioId()+" has been "+email.getPortfolioStatus().toLowerCase()+ ".";
+				
+				if (email.getFeedBack().length() > 0) {
+					body = body.concat(" Your reviewer has left the following feedback:" + "\n" + "\n" 
+					+ email.getFeedBack() + "\n" + "\n"
+					+ "Thanks for submitting your portfolio.");
+				} else {
+					body = body.concat("\n" + "\n" + "Thanks for submitting your portfolio.");
+				}
+				
 		System.out.println(body);
 		if(esi==null) {
 			System.out.println("it's null");
