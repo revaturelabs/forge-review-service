@@ -58,7 +58,7 @@ public class AdminController {
 	public void saveUser(@RequestBody User u) {
 		System.out.println(u);
 		userRepo.save(u);
-		System.out.println("please");
+		
 	}
 	
 }

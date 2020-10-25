@@ -26,6 +26,19 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(exclude = "portfolios")
 public class User {
 
+	
+
+
+	public User(int userId, String email, String password, String firstName, String lastName) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+
 	@Id
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
