@@ -100,4 +100,31 @@ public class AdminControllerTest {
 		verify(userRepo, times(1)).findByEmail("myemail@email.com");
 	}
 	
+	@Test
+	public void getUserTest() {
+		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", null);
+		when(userRepo.findByUserId(1)).thenReturn(user);
+		
+		User result = adminController.getUser(1);
+		
+		Assertions.assertEquals(1, result.getUserId());
+		verify(userRepo, times(1)).findByUserId(1);
+	}
+	
+	@Test
+	public void getPortfolioTest() {
+		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", null);
+		List<Portfolio> list = new ArrayList<Portfolio>();
+		list.add(new Portfolio(1, "Name1", "Pending", null, null, null, null, null, null));
+		list.add(new Portfolio(2, "Name2", "Pending", null, null, null, null, null, null));
+		
+		when(userRepo.findByUserId(1)).thenReturn(user);
+		when(portfolioRepo.findByMyUser(user)).thenReturn(list);
+		
+		List<Portfolio> result = adminController.getPortfolio(1);
+		
+		Assertions.assertEquals(2, result.size());
+		verify(userRepo, times(1)).findByUserId(1);
+		verify(portfolioRepo, times(1)).findByMyUser(user);
+	}
 }
