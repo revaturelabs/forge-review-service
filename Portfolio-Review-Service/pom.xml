@@ -116,6 +116,13 @@
 		  <scope>compile</scope>
 		</dependency>
 		
+		<!-- BEGIN H2 FOR TESTING -->
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <scope>runtime</scope>
+		</dependency>
+		<!-- END H2 FOR TESTING -->
 		
 		<dependency>
             <groupId>org.springframework.boot</groupId>
