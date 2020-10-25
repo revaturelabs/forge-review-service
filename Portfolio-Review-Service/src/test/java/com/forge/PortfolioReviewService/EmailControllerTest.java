@@ -1,9 +1,10 @@
 package com.forge.PortfolioReviewService;
 
-import static org.mockito.Mockito.verify;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,8 +17,8 @@ import com.forge.PortfolioReviewService.repository.EmailServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class EmailControllerTest {
-	
+class EmailControllerTest {
+
 	@Autowired
 	@MockBean
 	private EmailServiceImpl esi;
