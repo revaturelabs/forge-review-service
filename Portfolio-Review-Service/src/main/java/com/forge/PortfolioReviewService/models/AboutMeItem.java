@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "about_me_item")
-//@EqualsAndHashCode(exclude = {"aboutMeItems"})
+@EqualsAndHashCode(exclude = {"aboutMeItems"})
 public class AboutMeItem {
 
 	@Id
@@ -33,7 +34,7 @@ public class AboutMeItem {
 	
 	@ManyToOne
 	@JoinColumn(name="about_me_id", nullable=false)
-//	@JsonManagedReference(value="aboutMe")
+	@JsonManagedReference(value="aboutMe")
 	private AboutMe aboutMe;
 	
 	@Override
