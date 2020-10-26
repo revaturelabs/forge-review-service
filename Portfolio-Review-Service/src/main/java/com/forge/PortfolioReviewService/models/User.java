@@ -2,6 +2,7 @@ package com.forge.PortfolioReviewService.models;
 
 import java.util.Set;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 
@@ -24,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "User_Table")
 @EqualsAndHashCode(exclude = "portfolios")
+@Generated()
 public class User {
 
 	@Id

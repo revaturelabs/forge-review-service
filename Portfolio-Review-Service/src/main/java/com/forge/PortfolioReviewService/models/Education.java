@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 
@@ -25,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "education")
 @EqualsAndHashCode(exclude = {"portfolio"})
+@Generated()
 public class Education {
 
 	@Id

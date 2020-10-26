@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "skill_matrix_item")
 //@EqualsAndHashCode(exclude = {"skillMatrixItems"})
+@Generated()
 public class SkillMatrixItem {
 
 	@Id
