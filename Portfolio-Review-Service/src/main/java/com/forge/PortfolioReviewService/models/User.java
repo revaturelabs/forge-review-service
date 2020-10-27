@@ -56,6 +56,9 @@ public class User {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
+	@Column(name= "is_Admin", nullable=false)
+	private boolean isAdmin;
+	
 	
 	@OneToMany(mappedBy = "myUser")
 	@JsonManagedReference(value="myUser")

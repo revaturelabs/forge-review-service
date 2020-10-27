@@ -31,9 +31,9 @@ public class SessionController {
 		
 		
 		ses.setAttribute("loggedInUser", incomingUser);		
-		System.out.println(incomingUser.toString());
+
 		return incomingUser;
-		
+	
 		
 	}
 	
@@ -45,7 +45,7 @@ public class SessionController {
 		
 		ses.invalidate();
 		
-		
+	
 		return new Message("You've successfully logged out");
 		
 	}
@@ -65,7 +65,7 @@ public class SessionController {
 			curUser = new User();
 		}
 		
-		System.out.println(curUser.toString());
+
 	
 		return curUser;
 	}
