@@ -23,53 +23,27 @@ public class SessionController {
 	@PostMapping(value="/login", produces = "application/json")
 	public @ResponseBody User login(HttpServletRequest req, @RequestBody User U) {
 		
-		
 		HttpSession ses= req.getSession();
-		
 		User incomingUser=U;	
-		
-		
-		
 		ses.setAttribute("loggedInUser", incomingUser);		
-
 		return incomingUser;
-	
-		
 	}
-	
-
-	
 	
 	@GetMapping(value="/logout", produces = "application/json")
 	public @ResponseBody Message logout(HttpSession ses) {
 		
 		ses.invalidate();
-		
-	
 		return new Message("You've successfully logged out");
-		
 	}
-	
-	
 	
 	@GetMapping(value="/loggers")
 	public @ResponseBody User getCurUser(HttpSession ses) {
-		 
-		
-		
+			
 		User curUser;
-		
 		curUser=(User)ses.getAttribute("loggedInUser");		
-		
 		if(curUser == null) {
 			curUser = new User();
 		}
-		
-
-	
 		return curUser;
 	}
-	
-	
-	
 }
