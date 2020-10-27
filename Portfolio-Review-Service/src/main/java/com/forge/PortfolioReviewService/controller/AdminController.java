@@ -17,7 +17,7 @@ import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/service")
 @CrossOrigin
 public class AdminController {
 	
@@ -44,7 +44,12 @@ public class AdminController {
 		return myList;
 	}
 	
+
+	
+	
 	@GetMapping("/getAllUsers")
+	//@ApiOperation(value="Getting the users",
+		//		  notes = "Retrieving the users that correspond with the portfolios")
 	public List<User> getUsers(){
 		return userRepo.findAll();
 	}
