@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -28,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "portfolio")
 @EqualsAndHashCode(exclude = {"projects", "education", "skillMatrix", "industryEquivalency"})
+@Generated()
 public class Portfolio {
  
 	@Id
@@ -41,28 +43,32 @@ public class Portfolio {
 	@Column(name = "status", nullable = false)
 	private String status;
 	
-	@OneToOne(mappedBy = "portfolio")
-	@JsonBackReference(value="portfolio")
+	@OneToOne(mappedBy = "portfolio", cascade = CascadeType.ALL)
+	@JsonManagedReference(value="portfolio")
     private AboutMe aboutMe;
 
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name="user_id", nullable=false)
+//	@OneToMany(mappedBy = "portfolio")
+//	@JsonManagedReference(value="aboutMePortfolio")
+//	private Set<AboutMe> aboutMe;
+	
 	@JsonBackReference(value="myUser")
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="user_id", nullable=false)
 	private User myUser;
 
-	@OneToMany(mappedBy = "portfolio")
+	@OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="projectPortfolio")
 	private Set<Project> projects;
 	
-	@OneToMany(mappedBy = "portfolio")
+	@OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="educationPortfolio")
 	private Set<Education> education;
 	
-	@OneToMany(mappedBy = "portfolio")
+	@OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="matrixPortfolio")
 	private Set<SkillMatrix> skillMatrix;
 	
-	@OneToMany(mappedBy = "portfolio")
+	@OneToMany(mappedBy = "portfolio",  cascade = CascadeType.ALL)
 	@JsonManagedReference(value="industryPortfolio")
 	private Set<IndustryEquivalency> industryEquivalency;
 

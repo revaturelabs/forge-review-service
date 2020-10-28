@@ -1,5 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -21,6 +23,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "skill_matrix_item")
 //@EqualsAndHashCode(exclude = {"skillMatrixItems"})
+@Generated()
 public class SkillMatrixItem {
 
 	@Id
@@ -34,7 +37,7 @@ public class SkillMatrixItem {
 	@Column(name = "experience")
 	private String experience;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="skill_matrix_id", nullable=false)
 	@JsonBackReference(value="skillMatrix")
 	private SkillMatrix skillMatrix;

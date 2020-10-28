@@ -15,4 +15,6 @@ public interface IndustryEquivalencyRepo extends CrudRepository<IndustryEquivale
 	public List<IndustryEquivalency> findAll();
 	
 	public IndustryEquivalency findById(int id);
+	
+	public void delete(IndustryEquivalency industryEq);
 }

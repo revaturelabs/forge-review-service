@@ -2,6 +2,7 @@ package com.forge.PortfolioReviewService.models;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -26,6 +28,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "project")
 @EqualsAndHashCode(exclude = {"projectResponsibilities", "projectTechnologies"})
+@Generated()
 public class Project {
 
 	@Id
@@ -39,16 +42,16 @@ public class Project {
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable=false)
 	@JsonBackReference(value="projectPortfolio")
 	private Portfolio portfolio;
 	
-	@OneToMany(mappedBy = "project")
+	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="responsibilitiesPortfolio")
 	private Set<ProjectResponsibilities> projectResponsibilities;
 	
-	@OneToMany(mappedBy = "project")
+	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="technologiesPortfolio")
 	private Set<ProjectTechnologies> projectTechnologies;
 }

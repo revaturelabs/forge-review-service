@@ -1,5 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "industry_equivalency")
+@Generated()
 public class IndustryEquivalency {
 
 	@Id
@@ -30,7 +33,7 @@ public class IndustryEquivalency {
 	@Column(name = "technology", nullable = false)
 	private String technology;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable=false)
 	@JsonBackReference(value="industryPortfolio")
 	private Portfolio portfolio;
