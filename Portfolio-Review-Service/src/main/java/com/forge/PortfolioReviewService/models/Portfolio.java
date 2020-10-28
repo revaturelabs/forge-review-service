@@ -2,6 +2,7 @@ package com.forge.PortfolioReviewService.models;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,7 @@ public class Portfolio {
 	@JsonBackReference(value="portfolio")
     private AboutMe aboutMe;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="user_id", nullable=false)
 	@JsonBackReference(value="myUser")
 	private User myUser;

@@ -73,6 +73,7 @@ public class AdminController {
 	
 	@PutMapping("/updatePortfolio")
 	public void updatePortfolio(@RequestBody Portfolio portfolio) {
+		System.out.println("Received portfolio " + portfolio);
 		portfolioRepo.save(portfolio);
 	}
 }
