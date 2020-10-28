@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -27,6 +28,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "About_Me_Table")
 @EqualsAndHashCode(exclude = {"portfolio", "aboutMeItems"})
+@Generated()
 public class AboutMe {
 	
 	@Id
@@ -40,11 +42,16 @@ public class AboutMe {
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "portfolio_id")
-	@JsonManagedReference(value="portfolio")
+	@JsonBackReference(value="portfolio")
     private Portfolio portfolio;
 	
-	@OneToMany(mappedBy = "aboutMe")
-//	@JsonBackReference(value="aboutMe")
+//	@ManyToOne
+//	@JoinColumn(name="portfolio_id", nullable=false)
+//	@JsonBackReference(value="aboutMePortfolio")
+//	private Portfolio portfolio;
+	
+	@OneToMany(mappedBy = "aboutMe",  cascade = CascadeType.ALL)
+	@JsonManagedReference(value="aboutMePortfolio")
 	private Set<AboutMeItem> aboutMeItems;
 	
 	@Override

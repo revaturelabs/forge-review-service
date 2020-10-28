@@ -2,6 +2,7 @@ package com.forge.PortfolioReviewService.models;
 
 import java.util.Set;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 
@@ -24,7 +26,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "User_Table")
 @EqualsAndHashCode(exclude = "portfolios")
+@Generated()
 public class User {
+
+	public User(int userId, String email, String password, String firstName, String lastName) {
+		super();
+		this.userId = userId;
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
 
 	@Id
 	@Column(name = "user_id")
@@ -43,11 +55,10 @@ public class User {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
+	@Column(name = "is_Admin", nullable = false)
+	private boolean isAdmin;
 	
-	@OneToMany(mappedBy = "myUser")
 	@JsonManagedReference(value="myUser")
+	@OneToMany(mappedBy = "myUser")
 	private Set<Portfolio> portfolios;
-	
-	
-
 }

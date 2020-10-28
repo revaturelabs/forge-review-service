@@ -1,5 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -20,6 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "project_responsibilites")
+@Generated()
 public class ProjectResponsibilities {
 
 	@Id
@@ -30,7 +33,7 @@ public class ProjectResponsibilities {
 	@Column(name = "content", nullable = false)
 	private String content;
 	
-	@ManyToOne
+	@ManyToOne( cascade = CascadeType.ALL)
 	@JoinColumn(name="project_id", nullable=false)
 	@JsonBackReference(value="responsibilitiesPortfolio")
 	private Project project;
