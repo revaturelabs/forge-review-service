@@ -61,9 +61,9 @@ public class AdminControllerTest {
 	@Test
 	public void getUsersTest() {
 		List<User> list = new ArrayList<User>();
-		list.add(new User(1, "test1@test.com", "password1", "FirstName1", "LastName1", null));
-		list.add(new User(2, "test2@test.com", "password2", "FirstName2", "LastName2", null));
-		list.add(new User(3, "test3@test.com", "password3", "FirstName3", "LastName3", null));
+		list.add(new User(1, "test1@test.com", "password1", "FirstName1", "LastName1", false, null));
+		list.add(new User(2, "test2@test.com", "password2", "FirstName2", "LastName2", false, null));
+		list.add(new User(3, "test3@test.com", "password3", "FirstName3", "LastName3", false, null));
 		when(userRepo.findAll()).thenReturn(list);
 		
 		List<User> result = adminController.getUsers();
@@ -93,7 +93,7 @@ public class AdminControllerTest {
 	
 	@Test
 	public void getUserByEmailTest() {
-		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", null);
+		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers",false, null);
 		when(userRepo.findByEmail("myemail@email.com")).thenReturn(user);
 		
 		adminController.getUserByEmail("myemail@email.com");
