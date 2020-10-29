@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.User;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
@@ -110,4 +111,29 @@ public class ServiceController {
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
 		return portfolioRepo.findByMyUser(getUser(id));
 	}	
+	
+	@GetMapping("/createPortfolio")
+    public Portfolio createPortfolio(@RequestParam int userId) {
+        System.out.println(userId);
+        User u = userRepo.findByUserId(userId);
+        Portfolio p = new Portfolio();
+        p.setBelongsTo(u.getEmail());
+        p.setStatus("Pending");
+        p.setMyUser(u);
+
+        AboutMe about = new AboutMe();
+        about.setDescription("Add about me");
+
+        System.out.println(p);
+        portfolioRepo.save(p);
+
+        //Get portfolio 
+        int createdPortfolio = portfolioRepo.createdPorfolio();
+        System.out.println(createdPortfolio);
+
+        Portfolio port = portfolioRepo.findById(createdPortfolio);
+
+        System.out.println(port);
+        return port;
+    }
 }
