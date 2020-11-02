@@ -33,9 +33,9 @@ public class EmailController {
 	public String sendEmail(@RequestBody Email email) {
 		
 		String body= "Hello, "+email.getUserFirstName()+"\n"+"\n"
-		+ "Your Porfolio number "+email.getPortfolioId()+" has been "+email.getPortfolioStatus()+ ". Your reviewer has left the following feedback: "+"\n"+"\n"
+		+ "Your portfolio number "+email.getPortfolioId()+" has been "+email.getPortfolioStatus().toLowerCase()+ ". Your reviewer has left the following feedback: "+"\n"+"\n"
 				+email.getFeedBack()+"\n"+"\n"
-		+"Thanks for submitting your porfolio.";
+		+"Thanks for submitting your portfolio.";
 		System.out.println(body);
 		if(esi==null) {
 			System.out.println("it's null");
