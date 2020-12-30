@@ -24,4 +24,6 @@ public interface PortfolioRepo extends CrudRepository<Portfolio, Integer>{
 
 	@Query("SELECT MAX(id) from Portfolio Portfolio")
     public int createdPorfolio();
+
+	public List<Portfolio> findAllByMyUser(User user);
 }
