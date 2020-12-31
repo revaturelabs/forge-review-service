@@ -56,6 +56,7 @@ public class Portfolio {
 	@JoinColumn(name="user_id", nullable=false)
 	private User myUser;
 
+	//Replacing below fields with List<ArrayList<PortfolioSection>> portfolioSection;
 	@OneToMany(mappedBy = "portfolio", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="projectPortfolio")
 	private Set<Project> projects;
