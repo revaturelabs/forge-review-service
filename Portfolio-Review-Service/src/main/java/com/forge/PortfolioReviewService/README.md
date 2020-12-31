@@ -16,7 +16,7 @@ admin@revature.net
 admin
 ```
 
-### Angular 
+### Angular FRONT-END
 Links: http://localhost:4200/
 
 ## Admin
@@ -35,8 +35,18 @@ Links: http://localhost:4200/
 [3] http://localhost:4200/registration 
 ```
  
-Click > Create Portfolio > 
-
+ Click > Create Portfolio > 
+ 
+ 
+### STS BACK-END
+ ```sh
+http://localhost:8200/service/getAllPortfolios
+http://localhost:8200/service/getAllUsers
+http://localhost:8200/service/getPortfolioByID/
+http://localhost:8200/email/sendEmail
+http://localhost:8200/service/getUserByEmail/
+http://localhost:8200/service/updatePortfolio
+ ```
 
 
 
