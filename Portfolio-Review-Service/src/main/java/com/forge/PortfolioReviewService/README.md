@@ -6,32 +6,36 @@
 #### [2] Angular Widget
 `https://material.angular.io/`
 
-### [3] H2
+#### [3] Trello 
+`https://connect.revature.net/board/matt-knighten-forge-batch-889-1/section`
+
+
+### [4] H2
 Link: http://localhost:8200/h2-console/
 
-[ H2 Login credentials ]
+[4.1] [ H2 Login credentials ]
 ```sh
 JDBC URL: jdbc:h2:mem:memdb
 username: sa
 pasword: password
 ```
 
-[ Admin Login credentials ]
+[4.2] [ Admin Login credentials ]
 ```sh
 admin@revature.net
 admin
 ```
 
-[ User Login credentials ]
+[4.3] [ User Login credentials ]
 ```sh
 user@revature.net
 password
 ```
 
-### [4] Angular FRONT-END
+### [5] Angular FRONT-END
 Links: http://localhost:4200/
 
-## Admin
+## [5.1] Admin
 ```sh
 [1] http://localhost:4200/login
 [2] http://localhost:4200/admin-home
@@ -40,7 +44,7 @@ Links: http://localhost:4200/
 [5] http://localhost:4200/navbar
 ```
 
-## User
+## [5.2] User
 ```sh
 [1] http://localhost:4200/login
 [2] http://localhost:4200/user-home
