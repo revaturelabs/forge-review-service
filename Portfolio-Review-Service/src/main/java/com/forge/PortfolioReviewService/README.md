@@ -9,17 +9,23 @@
 ### [3] H2
 Link: http://localhost:8200/h2-console/
 
-[ Login credentials ]
+[ H2 Login credentials ]
 ```sh
 JDBC URL: jdbc:h2:mem:memdb
 username: sa
 pasword: password
 ```
 
-[ Login credentials ]
+[ Admin Login credentials ]
 ```sh
 admin@revature.net
 admin
+```
+
+[ User Login credentials ]
+```sh
+user@revature.net
+password
 ```
 
 ### [4] Angular FRONT-END
