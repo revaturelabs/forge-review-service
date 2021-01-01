@@ -10,7 +10,7 @@
 `https://connect.revature.net/board/matt-knighten-forge-batch-889-1/section`
 
 
-### [4] H2
+#### [4] H2
 Link: http://localhost:8200/h2-console/
 
 [4.1] [ H2 Login credentials ]
@@ -32,10 +32,10 @@ user@revature.net
 password
 ```
 
-### [5] Angular FRONT-END
+#### [5] Angular FRONT-END
 Links: http://localhost:4200/
 
-## [5.1] Admin
+##### [5.1] Admin
 ```sh
 [1] http://localhost:4200/login
 [2] http://localhost:4200/admin-home
@@ -44,7 +44,7 @@ Links: http://localhost:4200/
 [5] http://localhost:4200/navbar
 ```
 
-## [5.2] User
+##### [5.2] User
 ```sh
 [1] http://localhost:4200/login
 [2] http://localhost:4200/user-home
@@ -54,7 +54,7 @@ Links: http://localhost:4200/
  Click > Create Portfolio > 
  
  
-### STS BACK-END
+##### [5.3] STS BACK-END
  ```sh
 http://localhost:8200/service/getAllPortfolios
 http://localhost:8200/service/getAllUsers
