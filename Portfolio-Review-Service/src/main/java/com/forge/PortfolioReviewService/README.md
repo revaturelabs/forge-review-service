@@ -1,10 +1,12 @@
 # Static Requirements Notes
 
-Documentation from Chris About Forge
-
+#### [1] Documentation from Chris About Forge
 `http://localhost:8200/swagger-ui.html#/`
 
-### H2
+#### [2] Angular Widget
+`https://material.angular.io/`
+
+### [3] H2
 Link: http://localhost:8200/h2-console/
 
 [ Login credentials ]
@@ -20,7 +22,7 @@ admin@revature.net
 admin
 ```
 
-### Angular FRONT-END
+### [4] Angular FRONT-END
 Links: http://localhost:4200/
 
 ## Admin
