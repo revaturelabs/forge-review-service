@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "About_Me_Table")
 @EqualsAndHashCode(exclude = {"portfolio", "aboutMeItems"})
 @Generated()
-public class AboutMe {
+public class AboutMe implements PortfolioSection{
 	
 	@Id
 	@Column(name = "about_me_id")

@@ -61,11 +61,11 @@ class PortfolioModelTest {
 		p.setId(1);
 		p.setBelongsTo("Isa");
 		p.setStatus("Pending");
-		p.setPortfolioSections(null);
+		p.setPortfolioSection(null);
 		Assertions.assertEquals(1, p.getId());
 		Assertions.assertEquals("Isa", p.getBelongsTo());
 		Assertions.assertEquals("Pending", p.getStatus());
-		Assertions.assertEquals(null, p.getPortfolioSections());
+		Assertions.assertEquals(null, p.getPortfolioSection());
 	}
 
 }

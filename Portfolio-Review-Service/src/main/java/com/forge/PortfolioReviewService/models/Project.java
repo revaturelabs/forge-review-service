@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "project")
 @EqualsAndHashCode(exclude = {"projectResponsibilities", "projectTechnologies"})
 @Generated()
-public class Project {
+public class Project implements PortfolioSection{
 
 	@Id
 	@Column(name = "project_id")
