@@ -1,17 +1,21 @@
 # Static Requirements Notes
 
 #### [1] Documentation from Chris About Forge
+```sh
 Link: http://localhost:8200/swagger-ui.html#/
-
+```
 #### [2] Angular Widget
-Link: https://material.angular.io/
-
+<pre>
+Link: <a href="https://material.angular.io/"> https://material.angular.io/ </a>
+<pre>
 #### [3] Trello 
-Link: https://connect.revature.net/board/matt-knighten-forge-batch-889-1/section
-
-
+<pre>
+Link: <a href="https://connect.revature.net/board/matt-knighten-forge-batch-889-1/section"> https://connect.revature.net/board/matt-knighten-forge-batch-889-1/section </a>
+<pre>
 #### [4] H2
-Link: http://localhost:8200/h2-console/
+<pre>
+Link: <a href="http://localhost:8200/h2-console/"> http://localhost:8200/h2-console/ </a>
+<pre>
 
 [4.1] [ H2 Login credentials ]
 ```sh
