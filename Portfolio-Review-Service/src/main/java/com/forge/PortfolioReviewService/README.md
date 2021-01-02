@@ -35,31 +35,31 @@ password
 #### [5] Angular FRONT-END
 
 ##### [5.1] Admin
-```sh
-[1] <http://localhost:4200/login>
-[2] http://localhost:4200/admin-home
-[3] http://localhost:4200/project
-[4] http://localhost:4200/viewPortfolio/{id}
-[5] http://localhost:4200/navbar
-```
+<pre>
+[1] <a href="http://localhost:4200/login"> http://localhost:4200/login </a>
+[2] <a href="http://localhost:4200/admin-home"> http://localhost:4200/admin-home </a>
+[3] <a href="http://localhost:4200/project"> http://localhost:4200/project </a>
+[4] <a href="http://localhost:4200/viewPortfolio/{id}"> http://localhost:4200/viewPortfolio/{id} </a>
+[5] <a href="http://localhost:4200/navbar"> http://localhost:4200/navbar </a>
+</pre>
 
 ##### [5.2] User
-```sh
+<pre>
 [1] <a href="http://localhost:4200/login"> http://localhost:4200/login </a>
-[2] http://localhost:4200/user-home
-[3] http://localhost:4200/registration 
-```
+[2] <a href="http://localhost:4200/user-home"> http://localhost:4200/user-home</a>
+[3] <a href="http://localhost:4200/registration"> http://localhost:4200/registration </a> 
+</pre>
  
  Click > Create Portfolio > 
  
 ##### [5.3] STS BACK-END
-```sh
-http://localhost:8200/service/getAllPortfolios 
-http://localhost:8200/service/getAllUsers
-http://localhost:8200/service/getPortfolioByID/
-http://localhost:8200/email/sendEmail
-http://localhost:8200/service/getUserByEmail/
-http://localhost:8200/service/updatePortfolio
-```
+<pre>
+<a href="http://localhost:8200/service/getAllPortfolios"> http://localhost:8200/service/getAllPortfolios  </a> 
+<a href="http://localhost:8200/service/getAllUsers"> http://localhost:8200/service/getAllUsers </a>
+<a href="http://localhost:8200/service/getPortfolioByID/"> http://localhost:8200/service/getPortfolioByID </a>
+<a href="http://localhost:8200/email/sendEmail"> http://localhost:8200/email/sendEmail </a>
+<a href="http://localhost:8200/service/getUserByEmail/"> http://localhost:8200/service/getUserByEmail/ </a>
+<a href="http://localhost:8200/service/updatePortfolio"> http://localhost:8200/service/updatePortfolio </a>
+</pre>
 
 
