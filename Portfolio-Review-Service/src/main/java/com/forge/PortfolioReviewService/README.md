@@ -20,20 +20,20 @@ Link: <a href="https://connect.revature.net/board/matt-knighten-forge-batch-889-
 Link: <a href="http://localhost:8200/h2-console/"> http://localhost:8200/h2-console/ </a>
 </pre>
 
-[4.1] [ H2 Login credentials ]
+##### [4.1] [ H2 Login credentials ]
 ```sh
 JDBC URL: jdbc:h2:mem:memdb
 username: sa
 pasword: password
 ```
 
-[4.2] [ Admin Login credentials ]
+##### [4.2] [ Admin Login credentials ]
 ```sh
 admin@revature.net
 admin
 ```
 
-[4.3] [ User Login credentials ]
+##### [4.3] [ User Login credentials ]
 ```sh
 user@revature.net
 password
