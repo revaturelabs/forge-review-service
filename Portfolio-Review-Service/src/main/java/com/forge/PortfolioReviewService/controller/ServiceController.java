@@ -61,14 +61,14 @@ public class ServiceController {
 	public List<User> getUsers(){
 		return userRepo.findAll();
 	}
-////	//bug fix modified method 1/1 no longer using this 
-////	//added user id parameter 
-//	@GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-////	@ApiOperation(value="Getting a user for verification",
-////	  			  notes = "Retrieving a specific user so they can login in accordingly")
-//	public User getUser(@RequestParam int id) {
-//		return userRepo.findByUserId(id);
-//	}
+//	//bug fix modified method 1/1 no longer using this 1/2 its still going to this method
+//	//added user id parameter 
+	@GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+//	@ApiOperation(value="Getting a user for verification",
+//	  			  notes = "Retrieving a specific user so they can login in accordingly")
+	public User getUser(@RequestParam int id) {
+		return userRepo.findByUserId(id);
+	}
 
 	
 
