@@ -36,26 +36,38 @@ password
 
 ##### [5.1] Admin
 [1] http://localhost:4200/login
+
 [2] http://localhost:4200/admin-home
+
 [3] http://localhost:4200/project
+
 [4] http://localhost:4200/viewPortfolio/{id}
+
 [5] http://localhost:4200/navbar
 
 
 ##### [5.2] User
 [1] http://localhost:4200/login
+
 [2] http://localhost:4200/user-home
+
 [3] http://localhost:4200/registration 
+
  
  Click > Create Portfolio > 
  
 ##### [5.3] STS BACK-END
- ```sh
+
 http://localhost:8200/service/getAllPortfolios
+
 http://localhost:8200/service/getAllUsers
+
 http://localhost:8200/service/getPortfolioByID/
+
 http://localhost:8200/email/sendEmail
+
 http://localhost:8200/service/getUserByEmail/
+
 http://localhost:8200/service/updatePortfolio
  ```
 
