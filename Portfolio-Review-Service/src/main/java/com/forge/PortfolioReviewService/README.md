@@ -33,26 +33,21 @@ password
 ```
 
 #### [5] Angular FRONT-END
-Links: http://localhost:4200/
 
 ##### [5.1] Admin
-```sh
 [1] http://localhost:4200/login
 [2] http://localhost:4200/admin-home
 [3] http://localhost:4200/project
 [4] http://localhost:4200/viewPortfolio/{id}
 [5] http://localhost:4200/navbar
-```
+
 
 ##### [5.2] User
-```sh
 [1] http://localhost:4200/login
 [2] http://localhost:4200/user-home
 [3] http://localhost:4200/registration 
-```
  
  Click > Create Portfolio > 
- 
  
 ##### [5.3] STS BACK-END
  ```sh
