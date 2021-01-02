@@ -57,7 +57,9 @@ password
 [3] <a href="http://localhost:4200/registration"> http://localhost:4200/registration </a> 
 </pre>
  
+ ```sh
  Click > Create Portfolio > 
+ ```
  
 ##### [5.3] STS BACK-END
 <pre>
