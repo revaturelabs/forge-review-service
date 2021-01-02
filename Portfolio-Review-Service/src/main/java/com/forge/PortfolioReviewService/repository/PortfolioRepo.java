@@ -1,6 +1,7 @@
 package com.forge.PortfolioReviewService.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,7 +19,7 @@ public interface PortfolioRepo extends CrudRepository<Portfolio, Integer>{
 	
 	public Portfolio findById(int id);
 	
-	public List<Portfolio> findByMyUser(User user);
+	public List<Portfolio> findByMyUser(Optional<User> user);
 	
 	public List<Portfolio> findByStatus(String status);
 
