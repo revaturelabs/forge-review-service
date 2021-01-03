@@ -81,7 +81,7 @@ public class ServiceController {
 		return u;
 	}
 	
-	@PutMapping("/updatePortfolio")
+	@PutMapping("/updatePortfolio") //
 	@ApiOperation(value="Updating Portfolios",
 	  			  notes ="Updating a portfolio from a specific user")
 	public void updatePortfolio(@RequestBody Portfolio portfolio) {
@@ -113,19 +113,19 @@ public class ServiceController {
 	}	
 	
 	@GetMapping("/createPortfolio")
-    public Portfolio createPortfolio(@RequestParam int userId) {
+    public Portfolio createPortfolio(@RequestParam int userId) { // change u and p to user and portfolio
         System.out.println(userId);
         User u = userRepo.findByUserId(userId);
         Portfolio p = new Portfolio();
         p.setBelongsTo(u.getEmail());
-        p.setStatus("Pending");
+        p.setStatus("Pending"); // default  database
         p.setMyUser(u);
 
-        AboutMe about = new AboutMe();
-        about.setDescription("Add about me");
+        AboutMe about = new AboutMe();  // delete
+        about.setDescription("Add about me"); // default
 
         System.out.println(p);
-        portfolioRepo.save(p);
+        portfolioRepo.save(p); // ngModel
 
         //Get portfolio 
         int createdPortfolio = portfolioRepo.createdPorfolio();
