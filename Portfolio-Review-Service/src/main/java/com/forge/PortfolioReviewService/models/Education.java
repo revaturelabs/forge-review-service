@@ -28,7 +28,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "education")
 @EqualsAndHashCode(exclude = {"portfolio"})
 @Generated()
-public class Education {
+public class Education implements PortfolioSection{
 
 	@Id
 	@Column(name = "education_id")

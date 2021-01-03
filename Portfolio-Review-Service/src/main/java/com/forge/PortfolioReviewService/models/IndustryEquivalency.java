@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "industry_equivalency")
 @Generated()
-public class IndustryEquivalency {
+public class IndustryEquivalency implements PortfolioSection{
 
 	@Id
 	@Column(name = "industry_equivalency_id")

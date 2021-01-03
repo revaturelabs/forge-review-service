@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "skill_matrix")
 @EqualsAndHashCode(exclude = {"skillMatrixItem"})
 @Generated()
-public class SkillMatrix {
+public class SkillMatrix implements PortfolioSection{
 
 	@Id
 	@Column(name = "skill_matrix_id")
