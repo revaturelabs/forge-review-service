@@ -71,4 +71,11 @@ password
 <a href="http://localhost:8200/service/updatePortfolio"> http://localhost:8200/service/updatePortfolio </a>
 </pre>
 
+### Setting up Angular
+ ```sh
+ng add @angular/material 
+ng serve -o
+ ```
+
+
 
