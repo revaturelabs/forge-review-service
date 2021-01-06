@@ -2,13 +2,13 @@ package com.forge.PortfolioReviewService.repository;
 
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.forge.PortfolioReviewService.models.ProjectResponsibilities;
 
 @Repository
-public interface ProjectResponsibilitiesRepo extends CrudRepository<ProjectResponsibilities, Integer>{
+public interface ProjectResponsibilitiesRepo extends JpaRepository<ProjectResponsibilities, Integer>{
 
 	public ProjectResponsibilities save(ProjectResponsibilities projectResponsibilities);
 	
