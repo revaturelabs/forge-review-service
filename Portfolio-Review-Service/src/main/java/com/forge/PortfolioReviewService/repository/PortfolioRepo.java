@@ -1,6 +1,7 @@
 package com.forge.PortfolioReviewService.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +21,7 @@ public interface PortfolioRepo extends JpaRepository<Portfolio, Integer>{
 	@Query(value = "SELECT * FROM portfolio WHERE id =:id", nativeQuery = true)
 	public Portfolio findById(int id);
 	
-	public List<Portfolio> findByMyUser(User user);
+	public List<Portfolio> findByMyUser(Optional<User> user);
 	
 	public List<Portfolio> findByStatus(String status);
 
