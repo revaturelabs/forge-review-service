@@ -1,8 +1,11 @@
 package com.forge.PortfolioReviewService.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.forge.PortfolioReviewService.models.AboutMe;
@@ -24,7 +28,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/service")
-@CrossOrigin
+@CrossOrigin(origins = {"http://localhost:4200"}, allowCredentials = "true")
 public class ServiceController {
 	
 	@Autowired
@@ -65,21 +69,26 @@ public class ServiceController {
 	@GetMapping("/getAllUsers")
 	@ApiOperation(value="Getting the users",
 				  notes = "Retrieving the users that correspond with the portfolios")
-	public List<User> getUsers(){
+	public List<User> getUsers() {
 		return userRepo.findAll();
 	}
+
+
 	
 	/*
  	Gets user by id from the database.
  	Input is user id.
 	Returns one user.
 	 */
-	@GetMapping("/getUser")
-	@ApiOperation(value="Getting a user for verification",
-	  			  notes = "Retrieving a specific user so they can login in accordingly")
+//	//bug fix modified method 1/1 no longer using this 1/2 its still going to this method
+//	//added user id parameter 
+	@GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+//	@ApiOperation(value="Getting a user for verification",
+//	  			  notes = "Retrieving a specific user so they can login in accordingly")
 	public User getUser(@RequestParam int id) {
 		return userRepo.findByUserId(id);
 	}
+
 	
 	/*
  	Sending user info to database.
@@ -111,32 +120,50 @@ public class ServiceController {
 		System.out.println("Received portfolio " + portfolio);
 		portfolioRepo.save(portfolio);
 	}
+
 	/*
 	 Gets portfolio by id.
 	 Input is portfolio id.
 	 Returns portfolio.
 	 */
+
+	//trying something new this works 
+	@GetMapping(value="/getUser/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+	public Optional<User> getUserById(@PathVariable(value="id") int id) {
+		Optional<User> user = userRepo.findById(id);
+		return user;
+	}
+	
+
 	@GetMapping("/getPortfolioByID/{id}")
-	@ApiOperation(value="Getting a portfolio by Id",
-	  			  notes = "Retrieving a specific portfolio from a user")
+//	@ApiOperation(value="Getting a portfolio by Id",
+//	  			  notes = "Retrieving a specific portfolio from a user")
 	public @ResponseBody Portfolio getPortfolioByID(@PathVariable("id") String id) {
 		int i = Integer.parseInt(id);
 		Portfolio p = portfolioRepo.findById(i);
 		return p;
 	}
+
 	
 	/*
 	 Creates a portfolio.
 	 Input is portfolio object.
 	 No output, because portfolio is saved in database.
 	 */
-	@PostMapping("/createPortfolio") //possible breakpoint
-	@ApiOperation(value="Adding a Portfolios",
-	  			 notes ="Adding a portfolio to a specific user")
-    public void createPortfolio(@RequestBody Portfolio portfolio) {
-        portfolioRepo.save(portfolio);
+
+
+	//bug fix fixing this 
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping("/createPortfolio/{id}")
+//	@ApiOperation(value="Adding a Portfolios",
+//	  			 notes ="Adding a portfolio to a specific user")
+    public Portfolio createPortfolio(@PathVariable(value="id") int id ,@RequestBody Portfolio portfolio) {
+		User user = userRepo.findByUserId(id);
+		portfolio.setStatus("Pending");
+		return portfolioRepo.save(portfolio);
+
     }
-	
+
 	/*
 	 ~~~~REFACTOR~~~~
 	 Should get portfolios by user id.
@@ -147,7 +174,10 @@ public class ServiceController {
 	@ApiOperation(value="Getting a specific portfolio",
 	  			  notes = "Retrieving a specific portfolio from a user to review")
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
+
+		
 		return portfolioRepo.findAllByMyUser(getUser(id));
+
 	}	
 
 }
