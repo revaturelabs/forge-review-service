@@ -31,17 +31,11 @@ class PortfolioModelTest {
 		eduList.add(e1);
 		eduList.add(e2);
 		pI.setItems(eduList);
-//		IndustryEquivalency ie = new IndustryEquivalency();
-//		Project pr = new Project();
-//		SkillMatrix sm = new SkillMatrix();
+
 		
 		assertNotNull(pI);
-//		assertEquals(5, ps.size());
-//		assertEquals(1, amList.size());
+
 		assertEquals(2, eduList.size());
-//		assertEquals(1, ieList.size());
-//		assertEquals(1, prList.size());
-//		assertEquals(1, smList.size());
 	}
 	
 	//Review
