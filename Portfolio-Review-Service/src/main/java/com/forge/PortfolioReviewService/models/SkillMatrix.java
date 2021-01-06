@@ -9,11 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "skill_matrix")
 @EqualsAndHashCode(exclude = {"skillMatrixItem"})
 @Generated()
-public class SkillMatrix implements PortfolioSection{
+public class SkillMatrix {
 
 	@Id
 	@Column(name = "skill_matrix_id")
@@ -39,10 +39,10 @@ public class SkillMatrix implements PortfolioSection{
 	@Column(name = "title")
 	private String title;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonBackReference(value="matrixPortfolio")
-	@JoinColumn(name="portfolio_id", nullable=false)
-	private Portfolio portfolio;
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "portfolio_items_id")
+    private int portfolioItemsId;
 	
 	@OneToMany(mappedBy = "skillMatrix",  cascade = CascadeType.ALL)
 	@JsonManagedReference(value="skillMatrix")
@@ -50,6 +50,7 @@ public class SkillMatrix implements PortfolioSection{
 	
 	@Override
 	public String toString() {
-		return "SkillMatrix [id=" + id + ", title=" + title + ", skillMatrixItem=" + skillMatrixItem + "]";
+		return "SkillMatrix [id=" + id + ", title=" + title + ", portfolioItemsId=" + portfolioItemsId
+				+ ", skillMatrixItem=" + skillMatrixItem + "]";
 	}
 }

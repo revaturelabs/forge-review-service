@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -29,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "project")
 @EqualsAndHashCode(exclude = {"projectResponsibilities", "projectTechnologies"})
 @Generated()
-public class Project implements PortfolioSection{
+public class Project{
 
 	@Id
 	@Column(name = "project_id")
@@ -42,10 +43,10 @@ public class Project implements PortfolioSection{
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_id", nullable=false)
-	@JsonBackReference(value="projectPortfolio")
-	private Portfolio portfolio;
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "portfolio_items_id")
+    private int portfolioItemsId;
 	
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="responsibilitiesPortfolio")
@@ -54,4 +55,6 @@ public class Project implements PortfolioSection{
 	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
 	@JsonManagedReference(value="technologiesPortfolio")
 	private Set<ProjectTechnologies> projectTechnologies;
+	
+
 }

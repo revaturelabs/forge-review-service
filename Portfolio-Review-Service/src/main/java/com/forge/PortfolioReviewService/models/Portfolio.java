@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "portfolio")
-@EqualsAndHashCode(exclude = {"projects", "education", "skillMatrix", "industryEquivalency"})
+@EqualsAndHashCode(exclude = "portfolioSection")
 @Generated()
 public class Portfolio {
  
@@ -35,25 +36,21 @@ public class Portfolio {
 	@Column(name = "portfolio_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name = "belongs_to", nullable = false)
-	private String belongsTo;
-	
-	@Column(name = "status", nullable = false)
+
+	@Column(name = "status", nullable = false, columnDefinition="varchar(255) DEFAULT 'pending'")
 	private String status;
 
 
-	@JsonBackReference(value="myUser")
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id", nullable=false)
-	private User myUser;
+	private int userId;
 	
-
-	private List<ArrayList<PortfolioSection>> portfolioSection;
+	@Transient
+	private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
 	
 	
 	@Override
 	public String toString() {
-		return "Portfolio [id=" + id + ", belongs_to=" + belongsTo + ", status=" + status + "]";
+		return "Portfolio [id=" + id + ", " + "status=" + status + ", userId=" + userId + "]";
 	}
 }
