@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.forge.PortfolioReviewService.models.AboutMe;
-import com.forge.PortfolioReviewService.models.AboutMeItem;
+
 import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 import com.forge.PortfolioReviewService.models.Project;
@@ -19,7 +19,7 @@ import com.forge.PortfolioReviewService.models.ProjectResponsibilities;
 import com.forge.PortfolioReviewService.models.ProjectTechnologies;
 import com.forge.PortfolioReviewService.models.SkillMatrix;
 import com.forge.PortfolioReviewService.models.SkillMatrixItem;
-import com.forge.PortfolioReviewService.repository.AboutMeItemRepo;
+
 import com.forge.PortfolioReviewService.repository.AboutMeRepo;
 import com.forge.PortfolioReviewService.repository.EducationRepo;
 import com.forge.PortfolioReviewService.repository.IndustryEquivalencyRepo;
@@ -38,8 +38,6 @@ import io.swagger.annotations.ApiOperation;
 public class PortfolioUpdateController {
 
 	@Autowired
-	private AboutMeItemRepo aboutMeItemRepo;
-	@Autowired
 	private AboutMeRepo aboutMeRepo;
 	@Autowired
 	private EducationRepo educationRepo;
@@ -56,20 +54,6 @@ public class PortfolioUpdateController {
 	@Autowired
 	private SkillMatrixRepo skillMatrixRepo;
 	
-	@GetMapping("/getaboutItem")
-	@ApiOperation(value="Getting the About Me Items",
-	  			  notes = "Retrieving the about me item section")
-	public AboutMeItem getAboutMeItem(@RequestParam int id) {
-		return aboutMeItemRepo.findById(id);
-	}
-	
-	@PutMapping("/aboutMeItem")
-	@ApiOperation(value="Updating the About Me Items",
-	  			  notes = "Updating the about me item section")
-	public String updateAboutMeItem(@RequestBody AboutMeItem aboutMeItem) {
-		aboutMeItemRepo.save(aboutMeItem);
-		return "Success!";
-	}
 	
 	@GetMapping("/getaboutMe")
 	@ApiOperation(value="Getting the About Me",

@@ -94,18 +94,7 @@ public class ServiceController {
 		userRepo.save(u);
 		
 	}
-  /*
-	Gets user by email from the database.
-	Input is user email.
-	Returns one user.
-	 */
-	@GetMapping("/getUserByEmail/{email}")
-	@ApiOperation(value="Getting a user by their email",
-	  			  notes ="Retrieving a users with that specific portfolios")
-	public @ResponseBody User getUserByEmail(@PathVariable("email") String email) {
-		User u = userRepo.findByEmail(email);
-		return u;
-	}
+
 
 	/*
 	 ~~~~REFACTOR~~~~
@@ -141,7 +130,7 @@ public class ServiceController {
 	 Input is portfolio object.
 	 No output, because portfolio is saved in database.
 	 */
-	@PostMapping("/createPortfolio")
+	@PostMapping("/createPortfolio") //possible breakpoint
 	@ApiOperation(value="Adding a Portfolios",
 	  			 notes ="Adding a portfolio to a specific user")
     public void createPortfolio(@RequestBody Portfolio portfolio) {
@@ -160,40 +149,5 @@ public class ServiceController {
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
 		return portfolioRepo.findAllByMyUser(getUser(id));
 	}	
-	
-	/*
-	 ~~~~ REFACTOR ~~~~
-	 Get a new portfolio.
-	 Input user id.
-	 Should return a created portfolio.
-	 Where is the portfolio info coming from?
-	 This will not work.
-	 */
-	@GetMapping("/createPortfolio")
-	@ApiOperation(value = "Creating a new portfolio",
-		notes = "Sending portfolio information to the database")
-    public Portfolio createPortfolio(@RequestParam int userId) { // change u and p to user and portfolio
 
-        System.out.println(userId);
-        User u = userRepo.findByUserId(userId);
-        Portfolio p = new Portfolio();
-        p.setBelongsTo(u.getEmail());
-        p.setStatus("Pending"); // default  database
-        p.setMyUser(u);
-
-        AboutMe about = new AboutMe();  // delete
-        about.setDescription("Add about me"); // default
-
-        System.out.println(p);
-        portfolioRepo.save(p); // ngModel
-
-        //Get portfolio 
-        int createdPortfolio = portfolioRepo.createdPorfolio();
-        System.out.println(createdPortfolio);
-
-        Portfolio port = portfolioRepo.findById(createdPortfolio);
-
-        System.out.println(port);
-        return port;
-    }
 }

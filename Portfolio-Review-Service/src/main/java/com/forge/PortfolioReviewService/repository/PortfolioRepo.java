@@ -16,6 +16,7 @@ public interface PortfolioRepo extends CrudRepository<Portfolio, Integer>{
 
 	public List<Portfolio> findAll();
 	
+	@Query(value = "SELECT * FROM portfolio WHERE id =:id", nativeQuery = true)
 	public Portfolio findById(int id);
 	
 	public List<Portfolio> findByMyUser(User user);

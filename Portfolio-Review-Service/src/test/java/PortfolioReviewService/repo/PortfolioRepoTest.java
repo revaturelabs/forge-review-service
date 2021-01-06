@@ -1,33 +1,59 @@
 package PortfolioReviewService.repo;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.Assertions;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationContext;
 
 import com.forge.PortfolioReviewService.models.Portfolio;
+import com.forge.PortfolioReviewService.models.PortfolioItems;
+import com.forge.PortfolioReviewService.models.Project;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 
-@DataJpaTest
+@SpringBootTest
+//@DataJpaTest
+//@RunWith(SpringRunner.class)
 class PortfolioRepoTest {
 
-	@Autowired
-    private TestEntityManager entityManager;
 	
-	@Autowired
+	@MockBean
+    ApplicationContext context;
+	
+	//@Autowired
+	@MockBean
 	private PortfolioRepo portfolioRepo;
 	
 	
 	@Test
-    public void testSaveNewProduct() {
-        entityManager.persist(new Portfolio(0, "Name1", "Pending", null, null, null, null, null, null));
-                 
-        Portfolio result = portfolioRepo.findById(1);
-         
-        Assertions.assertEquals("Name1", result.getBelongsTo());
+    public void testSaveNewPotfolio() {
+		
+		//PortfolioRepo portfolioRepoFromContext = context.getBean(Portfolio.class);
+
+		Project p1 = new Project();
+		Project p2 = new Project();
+		List<Project> projList = new ArrayList<Project>();
+		projList.add(p1);
+		projList.add(p2);
+        PortfolioItems pI = new PortfolioItems(); 
+        pI.setItems(projList);
+        List<PortfolioItems> potList = new ArrayList<PortfolioItems>();
+        potList.add(pI);
+        Portfolio port1 = new Portfolio(2, "pending", 1, potList);
+        
+      
+        //Portfolio result = portfolioRepo.findById(1);
+        //portfolioRepo.save(new Portfolio(2, "pending", 1, potList));
+        
+        when(portfolioRepo.findById(2)).thenReturn(port1);
+
+    
+       assertEquals(port1, portfolioRepo.findById(2));
     }
 
 }

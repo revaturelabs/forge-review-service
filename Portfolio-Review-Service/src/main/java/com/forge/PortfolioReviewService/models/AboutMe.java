@@ -27,9 +27,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "About_Me_Table")
-@EqualsAndHashCode(exclude = {"portfolio", "aboutMeItems"})
 @Generated()
-public class AboutMe implements PortfolioSection{
+public class AboutMe{
 	
 	@Id
 	@Column(name = "about_me_id")
@@ -41,21 +40,13 @@ public class AboutMe implements PortfolioSection{
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_id")
-	@JsonBackReference(value="portfolio")
-    private Portfolio portfolio;
+    @JoinColumn(name = "portfolio_items_id")
+    private int portfolioItemsId;
 	
-//	@ManyToOne
-//	@JoinColumn(name="portfolio_id", nullable=false)
-//	@JsonBackReference(value="aboutMePortfolio")
-//	private Portfolio portfolio;
 	
-	@OneToMany(mappedBy = "aboutMe",  cascade = CascadeType.ALL)
-	@JsonManagedReference(value="aboutMePortfolio")
-	private Set<AboutMeItem> aboutMeItems;
 	
 	@Override
 	public String toString() {
-		return "AboutMe [id=" + id + ", description=" + description + ", aboutMeItems=" + aboutMeItems + "]";
+		return "AboutMe [id=" + id + ", description=" + description + ", portfolio_iems_idd=" + portfolioItemsId + "]";
 	}
 }

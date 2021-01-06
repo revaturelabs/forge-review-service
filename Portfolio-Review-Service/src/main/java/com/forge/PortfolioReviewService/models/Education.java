@@ -26,9 +26,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "education")
-@EqualsAndHashCode(exclude = {"portfolio"})
 @Generated()
-public class Education implements PortfolioSection{
+public class Education{
 
 	@Id
 	@Column(name = "education_id")
@@ -51,13 +50,12 @@ public class Education implements PortfolioSection{
 	private String degree;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_id", nullable=false)
-	@JsonBackReference(value="educationPortfolio")
-	private Portfolio portfolio;
+	@JoinColumn(name="portfolio_items_id", nullable=false)
+	private int portfolioItemsId;
 	
 	@Override
 	public String toString() {
 		return "Education [id=" + id + ", university=" + university + ", graduation=" + graduation + ", major=" + major
-				+ ", minor=" + minor + "]";
+				+ ", minor=" + minor + ", degree=" + degree + ", portfolioItemId=" + portfolioItemsId + "]";
 	}
 }
