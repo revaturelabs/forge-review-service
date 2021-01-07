@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
@@ -39,10 +38,10 @@ public class SkillMatrix {
 	@Column(name = "title")
 	private String title;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JsonBackReference(value="matrixPortfolio")
-	@JoinColumn(name="portfolio_id", nullable=false)
-	private Portfolio portfolio;
+
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "portfolio_items_id")
+    private int portfolioItemsId;
 	
 	@OneToMany(mappedBy = "skillMatrix",  cascade = CascadeType.ALL)
 	@JsonManagedReference(value="skillMatrix")
@@ -50,6 +49,7 @@ public class SkillMatrix {
 	
 	@Override
 	public String toString() {
-		return "SkillMatrix [id=" + id + ", title=" + title + ", skillMatrixItem=" + skillMatrixItem + "]";
+		return "SkillMatrix [id=" + id + ", title=" + title + ", portfolioItemsId=" + portfolioItemsId
+				+ ", skillMatrixItem=" + skillMatrixItem + "]";
 	}
 }

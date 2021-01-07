@@ -10,8 +10,6 @@ import com.forge.PortfolioReviewService.models.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Integer>{
 	
-	public User save(User user);
-	
 	public List<User> findAll();
 	
 	public User findByUserId(int id);
