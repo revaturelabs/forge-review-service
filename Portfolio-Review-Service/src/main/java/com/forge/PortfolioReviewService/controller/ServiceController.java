@@ -26,8 +26,6 @@ import com.forge.PortfolioReviewService.repository.UserRepo;
 
 import io.swagger.annotations.ApiOperation;
 
-
-
 @RestController
 @RequestMapping("/service")
 @CrossOrigin(origins = {"http://localhost:4200"}, allowCredentials = "true")
@@ -38,7 +36,11 @@ public class ServiceController {
 	
 	@Autowired
 	private UserRepo userRepo;
-
+	
+	/*
+ 	Gets all portfolios from the database.
+	Returns a lists of all portfolios.
+	 */
 	@GetMapping("/getAllPortfolios")
 	@ApiOperation(value="Getting all portofios",
 	  			  notes = "Retrieving all the portfolios to view them")
@@ -47,6 +49,11 @@ public class ServiceController {
 		return myList;
 	}
 	
+	/*
+ 	Gets all portfolios by their status from the database.
+ 	Input is status. 
+	Returns a lists of portfolios by status.
+	 */
 	@GetMapping("/getPortfoliosByStatus")
 	@ApiOperation(value="Getting portfolio status",
 	  			  notes = "Retrieving portfolio status to filter accordingly")
@@ -55,12 +62,24 @@ public class ServiceController {
 		return myList;
 	}
 	
+	/*
+ 	Gets all users from the database.
+	Returns a lists of all users.
+	 */
 	@GetMapping("/getAllUsers")
 	@ApiOperation(value="Getting the users",
 				  notes = "Retrieving the users that correspond with the portfolios")
-	public List<User> getUsers(){
+	public List<User> getUsers() {
 		return userRepo.findAll();
 	}
+
+
+	
+	/*
+ 	Gets user by id from the database.
+ 	Input is user id.
+	Returns one user.
+	 */
 //	//bug fix modified method 1/1 no longer using this 1/2 its still going to this method
 //	//added user id parameter 
 	@GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
@@ -71,22 +90,29 @@ public class ServiceController {
 	}
 
 	
-
+	/*
+ 	Sending user info to database.
+ 	Input is user object.
+ 	No output, but user info is saved into database.
+	 */
   @PostMapping("/createUser")
+  @ApiOperation(value = "Creating a new user",
+		  		notes = "Sending user information to the database")
 	public void saveUser(@RequestBody User u) {
 		System.out.println(u);
 		userRepo.save(u);
 		
 	}
-	
-	@GetMapping("/getUserByEmail/{email}")
-	@ApiOperation(value="Getting a user by their email",
-	  			  notes ="Retrieving a users with that specific portfolios")
-	public @ResponseBody User getUserByEmail(@PathVariable("email") String email) {
-		User u = userRepo.findByEmail(email);
-		return u;
-	}
-	
+
+
+	/*
+	 ~~~~REFACTOR~~~~
+	 SHOULD update portfolio in database.
+	 Input portfolio object.
+	 No output, but it updates portfolio.
+	 Special Notes/Suggestions: Should update by id not a object, by first getting the portfolio and then
+	 		updating info within the portfolio because portfolio exists in database prior to this.
+	 */
 	@PutMapping("/updatePortfolio")
 	@ApiOperation(value="Updating Portfolios",
 	  			  notes ="Updating a portfolio from a specific user")
@@ -94,6 +120,13 @@ public class ServiceController {
 		System.out.println("Received portfolio " + portfolio);
 		portfolioRepo.save(portfolio);
 	}
+
+	/*
+	 Gets portfolio by id.
+	 Input is portfolio id.
+	 Returns portfolio.
+	 */
+
 	//trying something new this works 
 	@GetMapping(value="/getUser/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	public Optional<User> getUserById(@PathVariable(value="id") int id) {
@@ -101,6 +134,7 @@ public class ServiceController {
 		return user;
 	}
 	
+
 	@GetMapping("/getPortfolioByID/{id}")
 //	@ApiOperation(value="Getting a portfolio by Id",
 //	  			  notes = "Retrieving a specific portfolio from a user")
@@ -109,6 +143,15 @@ public class ServiceController {
 		Portfolio p = portfolioRepo.findById(i);
 		return p;
 	}
+
+	
+	/*
+	 Creates a portfolio.
+	 Input is portfolio object.
+	 No output, because portfolio is saved in database.
+	 */
+
+
 	//bug fix fixing this 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/createPortfolio/{id}")
@@ -117,40 +160,24 @@ public class ServiceController {
     public Portfolio createPortfolio(@PathVariable(value="id") int id ,@RequestBody Portfolio portfolio) {
 		User user = userRepo.findByUserId(id);
 		portfolio.setStatus("Pending");
-		portfolio.setMyUser(user);
-		portfolio.setBelongsTo(user.getEmail());
 		return portfolioRepo.save(portfolio);
+
     }
-	
+
+	/*
+	 ~~~~REFACTOR~~~~
+	 Should get portfolios by user id.
+	 Input user id.
+	 Returns a list of portfolios?
+	 */
 	@GetMapping("/getPortfolio")
 	@ApiOperation(value="Getting a specific portfolio",
 	  			  notes = "Retrieving a specific portfolio from a user to review")
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
-		return portfolioRepo.findByMyUser(getUserById(id));
+
+		
+		return portfolioRepo.findAllByUserId(id);
+
 	}	
-	
-	@GetMapping("/createPortfolio")
-    public Portfolio createPortfolio(@RequestParam int userId) {
-        System.out.println(userId);
-        User u = userRepo.findByUserId(userId);
-        Portfolio p = new Portfolio();
-        p.setBelongsTo(u.getEmail());
-        p.setStatus("Pending");
-        p.setMyUser(u);
 
-        AboutMe about = new AboutMe();
-        about.setDescription("Add about me");
-
-        System.out.println(p);
-        portfolioRepo.save(p);
-
-        //Get portfolio 
-        int createdPortfolio = portfolioRepo.createdPorfolio();
-        System.out.println(createdPortfolio);
-
-        Portfolio port = portfolioRepo.findById(createdPortfolio);
-
-        System.out.println(port);
-        return port;
-    }
 }

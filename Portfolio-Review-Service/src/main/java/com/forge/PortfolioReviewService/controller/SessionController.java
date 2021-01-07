@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.forge.PortfolioReviewService.models.Message;
 import com.forge.PortfolioReviewService.models.User;
 
 
@@ -30,10 +28,10 @@ public class SessionController {
 	}
 	
 	@GetMapping(value="/logout", produces = "application/json")
-	public @ResponseBody Message logout(HttpSession ses) {
+	public @ResponseBody String logout(HttpSession ses) {
 		
 		ses.invalidate();
-		return new Message("You've successfully logged out");
+		return "You've successfully logged out";
 	}
 	
 	@GetMapping(value="/loggers")

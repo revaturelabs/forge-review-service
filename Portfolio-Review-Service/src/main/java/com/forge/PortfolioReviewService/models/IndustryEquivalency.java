@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "industry_equivalency")
 @Generated()
-public class IndustryEquivalency {
+public class IndustryEquivalency{
 
 	@Id
 	@Column(name = "industry_equivalency_id")
@@ -33,14 +34,15 @@ public class IndustryEquivalency {
 	@Column(name = "technology", nullable = false)
 	private String technology;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_id", nullable=false)
-	@JsonBackReference(value="industryPortfolio")
-	private Portfolio portfolio;
+
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "portfolio_items_id")
+    private int portfolioItemsId;
 
 	@Override
 	public String toString() {
-		return "IndustryEquivalency [id=" + id + ", months=" + months + ", technology=" + technology + "]";
+		return "IndustryEquivalency [id=" + id + ", months=" + months + ", technology=" + technology
+				+ ", portfolioItemsId=" + portfolioItemsId + "]";
 	}
 	
 	

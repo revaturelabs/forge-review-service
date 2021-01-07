@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.forge.PortfolioReviewService.controller.ServiceController;
 import com.forge.PortfolioReviewService.models.Portfolio;
+import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.User;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
@@ -36,9 +37,9 @@ public class ServiceControllerTest {
 	@Test
 	public void getAllPortfolioTest() {
 		List<Portfolio> list = new ArrayList<Portfolio>();
-		list.add(new Portfolio(1, "Name1", "Pending", null, null, null, null, null, null));
-		list.add(new Portfolio(2, "Name2", "Waiting", null, null, null, null, null, null));
-		list.add(new Portfolio(3, "Name3", "Pending", null, null, null, null, null, null));
+		list.add(new Portfolio(1, "pending", 1, null));
+		list.add(new Portfolio(2, "pending", 1, null));
+		list.add(new Portfolio(3, "pending", 1, null));
 		when(portfolioRepo.findAll()).thenReturn(list);
 		
 		List<Portfolio> result = serviceController.getPortfolios();
@@ -49,8 +50,9 @@ public class ServiceControllerTest {
 	@Test
 	public void getPortfoliosByStatusTest() {
 		List<Portfolio> list = new ArrayList<Portfolio>();
-		list.add(new Portfolio(1, "Name1", "Pending", null, null, null, null, null, null));
-		list.add(new Portfolio(2, "Name2", "Pending", null, null, null, null, null, null));
+		list.add(new Portfolio(1, "pending", 1, null));
+		list.add(new Portfolio(2, "pending", 1, null));
+		list.add(new Portfolio(3, "pending", 1, null));
 		when(portfolioRepo.findByStatus("Pending")).thenReturn(list);
 		
 		List<Portfolio> result = serviceController.getPortfoliosByStatus("Pending");
@@ -73,7 +75,7 @@ public class ServiceControllerTest {
 	
 	@Test
 	public void updatePortfolioTest() {
-		Portfolio portfolio = new Portfolio(1, "Annie", "pending", null, null, null, null, null, null);
+		Portfolio portfolio = new Portfolio(1, "pending", 1, null);
 		
 		when(portfolioRepo.save(any())).thenReturn(portfolio);
 		
@@ -84,22 +86,14 @@ public class ServiceControllerTest {
 	
 	@Test
 	public void getPortfolioByIDTest() {
-		Portfolio portfolio = new Portfolio(1, "Annie", "pending", null, null, null, null, null, null);
+		Portfolio portfolio = new Portfolio(1, "pending", 1, null);
 		when(portfolioRepo.findById(1)).thenReturn(portfolio);
 		
 		serviceController.getPortfolioByID("1");
 		verify(portfolioRepo, times(1)).findById(1);
 	}
 	
-	@Test
-	public void getUserByEmailTest() {
-		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", false, null);
-		when(userRepo.findByEmail("myemail@email.com")).thenReturn(user);
-		
-		serviceController.getUserByEmail("myemail@email.com");
-		verify(userRepo, times(1)).findByEmail("myemail@email.com");
-	}
-	
+
 	@Test
 	public void getUserTest() {
 		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", false, null);
@@ -115,25 +109,26 @@ public class ServiceControllerTest {
 	public void getPortfolioTest() {
 		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", false, null);
 		List<Portfolio> list = new ArrayList<Portfolio>();
-		list.add(new Portfolio(1, "Name1", "Pending", null, null, null, null, null, null));
-		list.add(new Portfolio(2, "Name2", "Pending", null, null, null, null, null, null));
+		list.add(new Portfolio(1, "pending", 1, null));
+		list.add(new Portfolio(2, "pending", 1, null));
 		
 		when(userRepo.findByUserId(1)).thenReturn(user);
-		when(portfolioRepo.findByMyUser(user)).thenReturn(list);
+		when(portfolioRepo.findByUserId(1)).thenReturn(list); //must be optional user
 		
 		List<Portfolio> result = serviceController.getPortfolio(1);
 		
 		Assertions.assertEquals(2, result.size());
 		verify(userRepo, times(1)).findByUserId(1);
-		verify(portfolioRepo, times(1)).findByMyUser(user);
+		verify(portfolioRepo, times(1)).findByUserId(1); //user must be optional
 	}
 	
-	@Test
+	@Test //tests 
 	public void createPortfolioTest() {
-		Portfolio portfolio = new Portfolio(1, "Annie", "pending", null, null, null, null, null, null);
+		List<PortfolioItems> portfolioSection = null;
+		Portfolio portfolio = new Portfolio(1, null, 0, portfolioSection );
 		when(portfolioRepo.save(portfolio)).thenReturn(portfolio);
 		
-		serviceController.createPortfolio(portfolio);
+		serviceController.createPortfolio(0, null); //must be optional portfolio
 		
 		verify(portfolioRepo, times(1)).save(portfolio);
 	}
