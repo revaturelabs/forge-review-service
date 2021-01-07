@@ -10,7 +10,6 @@ import com.forge.PortfolioReviewService.models.Education;
 @Repository
 public interface EducationRepo extends JpaRepository<Education, Integer>{
 
-	public Education save(Education education);
 	
 	public List<Education> findAll();
 	

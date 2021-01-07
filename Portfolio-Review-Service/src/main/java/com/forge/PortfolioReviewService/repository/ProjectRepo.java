@@ -11,8 +11,6 @@ import com.forge.PortfolioReviewService.models.Project;
 public interface ProjectRepo extends JpaRepository<Project, Integer>{
 
 	
-	public Project save(Project project);
-	
 	public List<Project> findAll();
 	
 	public Project findById(int id);

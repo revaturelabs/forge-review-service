@@ -9,8 +9,6 @@ import com.forge.PortfolioReviewService.models.ProjectResponsibilities;
 
 @Repository
 public interface ProjectResponsibilitiesRepo extends JpaRepository<ProjectResponsibilities, Integer>{
-
-	public ProjectResponsibilities save(ProjectResponsibilities projectResponsibilities);
 	
 	public List<ProjectResponsibilities> findAll();
 	

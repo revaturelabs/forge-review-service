@@ -9,8 +9,6 @@ import com.forge.PortfolioReviewService.models.SkillMatrixItem;
 
 @Repository
 public interface SkillMatrixItemRepo extends JpaRepository<SkillMatrixItem, Integer>{
-
-	public SkillMatrixItem save(SkillMatrixItem skillMatrixItem);
 	
 	public List<SkillMatrixItem> findAll();
 	

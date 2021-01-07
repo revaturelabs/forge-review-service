@@ -113,13 +113,13 @@ public class ServiceControllerTest {
 		list.add(new Portfolio(2, "pending", 1, null));
 		
 		when(userRepo.findByUserId(1)).thenReturn(user);
-		when(portfolioRepo.findByMyUser(null)).thenReturn(list); //must be optional user
+		when(portfolioRepo.findByUserId(1)).thenReturn(list); //must be optional user
 		
 		List<Portfolio> result = serviceController.getPortfolio(1);
 		
 		Assertions.assertEquals(2, result.size());
 		verify(userRepo, times(1)).findByUserId(1);
-		verify(portfolioRepo, times(1)).findByMyUser(null); //user must be optional
+		verify(portfolioRepo, times(1)).findByUserId(1); //user must be optional
 	}
 	
 	@Test //tests 

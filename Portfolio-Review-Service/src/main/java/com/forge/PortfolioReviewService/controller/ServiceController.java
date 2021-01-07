@@ -176,7 +176,7 @@ public class ServiceController {
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
 
 		
-		return portfolioRepo.findAllByMyUser(getUser(id));
+		return portfolioRepo.findAllByUserId(id);
 
 	}	
 

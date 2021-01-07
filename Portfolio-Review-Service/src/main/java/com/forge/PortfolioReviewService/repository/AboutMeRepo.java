@@ -9,8 +9,6 @@ import com.forge.PortfolioReviewService.models.AboutMe;
 
 @Repository
 public interface AboutMeRepo extends JpaRepository<AboutMe, Integer>{
-
-	public AboutMe save(AboutMe aboutMe);
 	
 	public List<AboutMe> findAll();
 	

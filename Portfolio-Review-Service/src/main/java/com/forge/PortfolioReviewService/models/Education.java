@@ -49,7 +49,7 @@ public class Education{
 	@Column(name = "degree")
 	private String degree;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_items_id", nullable=false)
 	private int portfolioItemsId;
 	

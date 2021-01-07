@@ -10,8 +10,6 @@ import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 
 @Repository
 public interface IndustryEquivalencyRepo extends JpaRepository<IndustryEquivalency, Integer>{
-
-	public IndustryEquivalency save(IndustryEquivalency industryEquivalency);
 	
 	public List<IndustryEquivalency> findAll();
 	

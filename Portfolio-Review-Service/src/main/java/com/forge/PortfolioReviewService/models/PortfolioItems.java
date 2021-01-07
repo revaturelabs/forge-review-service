@@ -1,17 +1,16 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -27,7 +26,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity()
 @Table(name = "portfolio_items")
 @EqualsAndHashCode()
 @Generated()
@@ -37,19 +36,19 @@ import lombok.NoArgsConstructor;
  *  and loosely coupling the individuals beans from the portfolio instance
  * */
 
-public class PortfolioItems {
+public class PortfolioItems{
 	
 	@JsonIgnore
 	@Transient 
 	private static final String SIMPLE_NAME = PortfolioItems.class.getSimpleName();
 	
 	@Id
-	@Column(name = "portfolio_item.id")
+	@Column(name = "portfolio_items_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int portfolioItemId;
 	
-	@Column(name = "portfolio_id")
-	@ManyToOne(cascade = CascadeType.ALL)
+	
+	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable = false)
 	private int portfolioId;
 	
@@ -61,8 +60,8 @@ public class PortfolioItems {
 	@Column(name = "title", nullable = false)
 	private String title = SIMPLE_NAME;
 	
-	@Transient
-	private List<?> items; 
+	@OneToMany(targetEntity=PortfolioItems.class, mappedBy="portfolioItemId")
+	public List<?> items; 
 
 	@Override
 	public String toString() {

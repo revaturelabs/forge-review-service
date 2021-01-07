@@ -9,8 +9,6 @@ import com.forge.PortfolioReviewService.models.ProjectTechnologies;
 
 @Repository
 public interface ProjectTechnologiesRepo extends JpaRepository<ProjectTechnologies, Integer>{
-
-	public ProjectTechnologies save(ProjectTechnologies projectTechnologies);
 	
 	public List<ProjectTechnologies> findAll();
 	

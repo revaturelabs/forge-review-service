@@ -44,7 +44,7 @@ public class Project{
 	private String description;
 	
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "portfolio_items_id")
     private int portfolioItemsId;
 	

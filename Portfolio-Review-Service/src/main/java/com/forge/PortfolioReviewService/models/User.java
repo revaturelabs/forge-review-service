@@ -51,7 +51,7 @@ public class User {
 	private boolean isAdmin;
 	
 	@JsonManagedReference(value="user_id")
-	@OneToMany(mappedBy = "user_id")
+	@OneToMany(mappedBy = "userId")
 	private Set<Portfolio> portfolios;
 
 	@Override

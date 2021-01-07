@@ -41,11 +41,11 @@ public class Portfolio {
 	private String status;
 
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id", nullable=false)
 	private int userId;
 	
-	@Transient
+	@OneToMany(mappedBy="portfolioItemId")
 	private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
 	
 	

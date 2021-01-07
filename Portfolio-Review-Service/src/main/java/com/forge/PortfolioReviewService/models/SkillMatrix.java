@@ -9,10 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -40,7 +39,7 @@ public class SkillMatrix {
 	private String title;
 	
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "portfolio_items_id")
     private int portfolioItemsId;
 	
