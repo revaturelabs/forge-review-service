@@ -39,8 +39,10 @@ public class Portfolio {
 
 	@Column(name = "status", nullable = false, columnDefinition="varchar(255) DEFAULT 'pending'")
 	private String status;
+	
+	
 
-
+	
 	@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id", nullable=false)
 	private int userId;

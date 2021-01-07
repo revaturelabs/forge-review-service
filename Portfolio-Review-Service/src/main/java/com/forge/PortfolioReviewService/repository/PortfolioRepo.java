@@ -13,11 +13,14 @@ import com.forge.PortfolioReviewService.models.User;
 
 @Repository
 public interface PortfolioRepo extends JpaRepository<Portfolio, Integer>{
+	
+	public Portfolio save(Portfolio portfolio);
 
 	public List<Portfolio> findAll();
 	
 	@Query(value = "SELECT * FROM portfolio WHERE id =:id", nativeQuery = true)
 	public Portfolio findById(int id);
+	
 	
 	public List<Portfolio> findByUserId(int id);
 	
@@ -26,5 +29,6 @@ public interface PortfolioRepo extends JpaRepository<Portfolio, Integer>{
 	@Query("SELECT MAX(id) from Portfolio Portfolio")
     public int createdPorfolio();
 
-	public List<Portfolio> findAllByUserId(int id);
+	//bugfix changing this 1/7
+	public List<Portfolio> findAllByUserId(Optional<User> user);
 }

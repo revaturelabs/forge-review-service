@@ -158,10 +158,13 @@ public class ServiceController {
 //	@ApiOperation(value="Adding a Portfolios",
 //	  			 notes ="Adding a portfolio to a specific user")
     public Portfolio createPortfolio(@PathVariable(value="id") int id ,@RequestBody Portfolio portfolio) {
-		User user = userRepo.findByUserId(id);
+		System.out.println(id); //this prints out the correct id
+		portfolio.setUserId(id);
 		portfolio.setStatus("Pending");
-		return portfolioRepo.save(portfolio);
-
+		System.out.println(portfolio.getStatus());
+		
+		portfolioRepo.save(portfolio);
+		return portfolio;
     }
 
 	/*
@@ -175,8 +178,8 @@ public class ServiceController {
 	  			  notes = "Retrieving a specific portfolio from a user to review")
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
 
-		
-		return portfolioRepo.findAllByUserId(id);
+		//bugfix modified method 1/7 
+		return portfolioRepo.findAllByUserId(getUserById(id));
 
 	}	
 

@@ -1,7 +1,7 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.Set;
 
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,8 +27,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "User_Table")
 @EqualsAndHashCode(exclude = "portfolios")
 @Generated()
-public class User {
-
+public class User  {
+	
 
 	@Id
 	@Column(name = "user_id")
@@ -50,7 +50,7 @@ public class User {
 	@Column(name = "is_Admin", nullable = false, columnDefinition="BOOLEAN DEFAULT false")
 	private boolean isAdmin;
 	
-	@JsonManagedReference(value="user_id")
+	//@JsonManagedReference(value="user_id")
 	@OneToMany(mappedBy = "userId")
 	private Set<Portfolio> portfolios;
 

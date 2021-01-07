@@ -1,6 +1,7 @@
 package com.forge.PortfolioReviewService.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,7 +56,7 @@ public class PortfolioUpdateController {
 	private SkillMatrixRepo skillMatrixRepo;
 	
 	
-	@GetMapping("/getaboutMe")
+	@GetMapping(value="/getaboutMe/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value="Getting the About Me",
 	  			  notes = "Retrieving the about me section")
 	public AboutMe getUpdateAboutMe(@RequestParam int id) {
