@@ -27,8 +27,13 @@ public class Criteria {
 	@Column(name = "criteria_name")
 	private String criteriaName;
 	
-	@Column(name = "criteria_value")
-	private String criteriaValue;
+	@Column(name = "entry_amount")
+	private String entryAmount;
+	
+	@Column(name = "requirements")
+	private String requirements;
+	
+	
 
 
 }

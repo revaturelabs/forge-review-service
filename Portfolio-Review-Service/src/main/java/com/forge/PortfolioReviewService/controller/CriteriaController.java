@@ -36,16 +36,22 @@ public class CriteriaController {
 
 	
 	//@PostMapping("/{id}")
-	@PostMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-	public Criteria updateCriteriaByid(@PathVariable(value="id") String id, @Valid @RequestBody Criteria criteria) {
-		int criteriaId=Integer.valueOf(id);
-		Criteria updateCriteria = criteriaRepo.findById(criteriaId);
+	@PostMapping(value="update/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+	public Criteria updateCriteriaByid(@PathVariable(value="id") int id, @Valid @RequestBody Criteria criteria) {
+		//int criteriaId=Integer.valueOf(id);
+		Criteria updateCriteria = criteriaRepo.findById(id);
 		System.out.println(criteria);
-		updateCriteria.setCriteriaValue(criteria.getCriteriaValue());
+		updateCriteria.setEntryAmount(criteria.getEntryAmount());
 		updateCriteria.setCriteriaName(criteria.getCriteriaName());
+		updateCriteria.setRequirements(criteria.getRequirements());
 		System.out.println(updateCriteria);
 		return criteriaRepo.save(updateCriteria);
 		
+	}
+	
+	@GetMapping("/{id}")
+	public Criteria findCriteriaById(@PathVariable(value="id") int id) {
+		return criteriaRepo.findById(id);
 	}
 	
 
