@@ -1,11 +1,11 @@
 package com.forge.PortfolioReviewService.repository;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+
 import org.springframework.stereotype.Repository;
 
 import com.forge.PortfolioReviewService.models.Portfolio;
@@ -22,7 +22,7 @@ public interface PortfolioRepo extends JpaRepository<Portfolio, Integer>{
 	public Portfolio findById(int id);
 	
 	
-	public List<Portfolio> findByUserId(int id);
+	public List<Portfolio> findByUser(User user);
 	
 	public List<Portfolio> findByStatus(String status);
 
@@ -30,5 +30,5 @@ public interface PortfolioRepo extends JpaRepository<Portfolio, Integer>{
     public int createdPorfolio();
 
 	//bugfix changing this 1/7
-	public List<Portfolio> findAllByUserId(Optional<User> user);
+	public List<Portfolio> findAllByUser(User user);
 }

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.User;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
@@ -159,7 +157,8 @@ public class ServiceController {
 //	  			 notes ="Adding a portfolio to a specific user")
     public Portfolio createPortfolio(@PathVariable(value="id") int id ,@RequestBody Portfolio portfolio) {
 		System.out.println(id); //this prints out the correct id
-		portfolio.setUserId(id);
+		User user = userRepo.findByUserId(id);
+		portfolio.setUser(user);
 		portfolio.setStatus("Pending");
 		System.out.println(portfolio.getStatus());
 		
@@ -179,7 +178,8 @@ public class ServiceController {
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
 
 		//bugfix modified method 1/7 
-		return portfolioRepo.findAllByUserId(getUserById(id));
+		User user = userRepo.findByUserId(id);
+		return portfolioRepo.findAllByUser(user);
 
 	}	
 
