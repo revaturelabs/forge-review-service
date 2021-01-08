@@ -34,16 +34,17 @@ public class Portfolio {
  
 	@Id
 	@Column(name = "portfolio_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(name = "status", nullable = false, columnDefinition="varchar(255) DEFAULT 'pending'")
 	private String status;
 
-
+	
+	@JsonBackReference
 	@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="user_id", nullable=false)
-	private int userId;
+	@JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
+	private User user;
 	
 	@OneToMany(mappedBy="portfolioItemId")
 	private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
@@ -51,6 +52,6 @@ public class Portfolio {
 	
 	@Override
 	public String toString() {
-		return "Portfolio [id=" + id + ", " + "status=" + status + ", userId=" + userId + "]";
+		return "Portfolio [id=" + id + ", " + "status=" + status + ", user=" + user + "]";
 	}
 }

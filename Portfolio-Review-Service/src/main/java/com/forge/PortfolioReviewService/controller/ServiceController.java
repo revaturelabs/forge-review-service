@@ -160,6 +160,10 @@ public class ServiceController {
     public Portfolio createPortfolio(@PathVariable(value="id") int id ,@RequestBody Portfolio portfolio) {
 		User user = userRepo.findByUserId(id);
 		portfolio.setStatus("Pending");
+		portfolio.setUser(user);
+		
+		//iff you change back, don't forget to change the repo
+		
 		return portfolioRepo.save(portfolio);
 
     }
@@ -175,8 +179,8 @@ public class ServiceController {
 	  			  notes = "Retrieving a specific portfolio from a user to review")
 	public List<Portfolio> getPortfolio(@RequestParam int id) {
 
-		
-		return portfolioRepo.findAllByUserId(id);
+		User user = userRepo.findByUserId(id);
+		return portfolioRepo.findAllByUser(user);
 
 	}	
 
