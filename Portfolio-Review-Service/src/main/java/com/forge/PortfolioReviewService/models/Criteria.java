@@ -28,7 +28,7 @@ public class Criteria {
 	private String criteriaName;
 	
 	@Column(name = "criteria_value")
-	private int criteriaValue;
+	private String criteriaValue;
 
 
 }
