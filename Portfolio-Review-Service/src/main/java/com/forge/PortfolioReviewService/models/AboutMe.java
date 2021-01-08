@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
@@ -31,14 +33,15 @@ public class AboutMe{
 	@Column(name = "description")
 	private String description;
 	
+	@JsonBackReference
 	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_items_id")
-    private int portfolioItemsId;
+	@JoinColumn(name="portfolio_items_id", nullable = false,  referencedColumnName = "portfolio_items_id")
+	private PortfolioItems portfolioItems;
 	
 	
 	
 	@Override
 	public String toString() {
-		return "AboutMe [id=" + id + ", description=" + description + ", portfolio_iems_id=" + portfolioItemsId + "]";
+		return "AboutMe [id=" + id + ", description=" + description + ", portfolioItems=" + portfolioItems + "]";
 	}
 }

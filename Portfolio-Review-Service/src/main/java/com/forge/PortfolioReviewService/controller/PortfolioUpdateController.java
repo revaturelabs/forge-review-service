@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,20 +57,22 @@ public class PortfolioUpdateController {
 	@Autowired
 	private SkillMatrixRepo skillMatrixRepo;
 	
-	
+	//bug fix modified lines 61 to 76 on 1/8
 	@GetMapping(value="/getaboutMe/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value="Getting the About Me",
 	  			  notes = "Retrieving the about me section")
-	public AboutMe getUpdateAboutMe(@RequestParam int id) {
-		return aboutMeRepo.findById(id);
+	public AboutMe getUpdateAboutMe(@PathVariable(value="id") int id) {
+		 return aboutMeRepo.findByItemId(id);
 	}
 	
-	@PutMapping("/aboutMe")
+	@PutMapping("/aboutMe/{id}")
 	@ApiOperation(value="Updating the About Me",
 				  notes = "Updating the about me section")
-	public String updateAboutMe(@RequestBody AboutMe aboutMe) {
-		aboutMeRepo.save(aboutMe);
-		return "Success!";
+	public AboutMe updateAboutMe(@PathVariable(value="id") int id) {
+		AboutMe aboutMe = aboutMeRepo.findById(id);
+		System.out.println("printing about me "+ aboutMe);
+		return aboutMeRepo.save(aboutMe);
+		
 	}
 	
 	@GetMapping("/geteducation")

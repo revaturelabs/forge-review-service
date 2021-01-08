@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity()
 @Table(name = "portfolio_items")
-@EqualsAndHashCode()
+@EqualsAndHashCode(exclude="items")
 @Generated()
 
 /* Wrapper class for potfolio section bean that includes some extra metadata 
@@ -48,9 +49,10 @@ public class PortfolioItems{
 	private int portfolioItemId;
 	
 	
+	@JsonBackReference
 	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_id", nullable = false)
-	private int portfolioId;
+	@JoinColumn(name="portfolio_id", nullable = false,  referencedColumnName = "portfolio_id")
+	private Portfolio portfolio;
 	
 	@Column(name = "priority")
 	private int priority;
@@ -60,12 +62,13 @@ public class PortfolioItems{
 	@Column(name = "title", nullable = false)
 	private String title = SIMPLE_NAME;
 	
-	@OneToMany(targetEntity=PortfolioItems.class, mappedBy="portfolioItemId")
-	public List<?> items; 
+	
+//	@OneToMany(targetEntity=PortfolioItems.class, mappedBy="portfolioItemId")
+//	public List<?> items; 
 
 	@Override
 	public String toString() {
-		return "PortfolioItems [portfolioItemId=" + portfolioItemId + ", portfolioId=" + portfolioId + ", priority="
+		return "PortfolioItems [portfolioItemId=" + portfolioItemId + ", portfolio=" + portfolio + ", priority="
 				+ priority + ", title=" + title + "]";
 	}
 

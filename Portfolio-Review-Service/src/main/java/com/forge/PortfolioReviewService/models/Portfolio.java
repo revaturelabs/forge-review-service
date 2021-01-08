@@ -14,8 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,27 +32,27 @@ import lombok.NoArgsConstructor;
 @Generated()
 public class Portfolio {
  
-	@Id
-	@Column(name = "portfolio_id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @Column(name = "portfolio_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column(name = "status", nullable = false, columnDefinition="varchar(255) DEFAULT 'pending'")
-	private String status;
-	
-	
+    @Column(name = "status", nullable = false, columnDefinition="varchar(255) DEFAULT 'pending'")
+    private String status;
 
-	@JsonBackReference
-	@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
-	private User user;
-	
-	@OneToMany(mappedBy="portfolioItemId")
-	private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
-	
-	
-	@Override
-	public String toString() {
-		return "Portfolio [id=" + id + ", " + "status=" + status + ", user=" + user + "]";
-	}
+    
+    @JsonBackReference
+    @ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
+    private User user;
+    
+    @JsonManagedReference
+    @OneToMany(mappedBy = "portfolio", targetEntity=PortfolioItems.class)
+    private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
+    
+    
+    @Override
+    public String toString() {
+        return "Portfolio [id=" + id + ", " + "status=" + status + ", user=" + user + "]";
+    }
 }
