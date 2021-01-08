@@ -28,33 +28,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "project")
-@EqualsAndHashCode(exclude = {"projectResponsibilities", "projectTechnologies"})
+@EqualsAndHashCode
 @Generated()
-public class Project{
+public class Project extends PortfolioItems{
 
-	@Id
-	@Column(name = "project_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="portfolio_items_id", nullable=false)
+	private int portfolioItemsId;
+
+	@Column(name = "priority", columnDefinition = "int DEFAULT 5")
+	private int priority;
 	
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "description")
 	private String description;
-	
 
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_items_id")
-    private int portfolioItemsId;
 	
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	@JsonManagedReference(value="responsibilitiesPortfolio")
-	private Set<ProjectResponsibilities> projectResponsibilities;
+	@Column(name = "project_responsibilities")
+	private String pResponsibilities;
 	
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	@JsonManagedReference(value="technologiesPortfolio")
-	private Set<ProjectTechnologies> projectTechnologies;
+	@Column(name = "project_tech")
+	private String pTech;
 	
 
 }

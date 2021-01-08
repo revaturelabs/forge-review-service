@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -46,7 +47,8 @@ public class Portfolio {
 	@JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy="portfolioItemId")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "portfolio", targetEntity=PortfolioItems.class)
 	private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
 	
 	

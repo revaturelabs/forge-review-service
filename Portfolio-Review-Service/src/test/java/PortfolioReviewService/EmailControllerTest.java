@@ -36,12 +36,12 @@ class EmailControllerTest {
 		int portfolioId = -1;
 		
 		Email email = new Email(firstName, userEmail, subject, portfolioStatus, feedback, portfolioId, null);
-		emailController.sendEmail(email);
-		verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles.\n\nYour Portfolio number -1 has been tested. Your reviewer has left the following feedback:\n\n"+feedback+"\n\nThanks for submitting your portfolio.");
-		
-		email.setFeedBack("");
-		emailController.sendEmail(email);
-		verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles.\n\nYour Portfolio number -1 has been tested.\n\nThanks for submitting your portfolio.");
+        emailController.sendEmail(email);
+        verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles\n\nYour portfolio number -1 has been tested. Your reviewer has left the following feedback: \n\n"+feedback+"\n\nThanks for submitting your portfolio.");
+        
+        email.setFeedBack("");
+        emailController.sendEmail(email);
+        verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles\n\nYour portfolio number -1 has been tested. Your reviewer has left the following feedback: \n\n\n\nThanks for submitting your portfolio.");
 		
 	}
 }

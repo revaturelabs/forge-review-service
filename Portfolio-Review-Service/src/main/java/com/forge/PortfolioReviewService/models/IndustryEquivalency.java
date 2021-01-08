@@ -22,11 +22,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "industry_equivalency")
 @Generated()
-public class IndustryEquivalency{
+public class IndustryEquivalency extends PortfolioItems{
 
-	@Id
-	@Column(name = "industry_equivalency_id")
-	private int id;
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="portfolio_items_id", nullable=false)
+	private int portfolioItemsId;
+
+	@Column(name = "priority", columnDefinition = "int DEFAULT 3")
+	private int priority;
 	
 	@Column(name = "months", nullable = false)
 	private int months;
@@ -35,13 +38,9 @@ public class IndustryEquivalency{
 	private String technology;
 	
 
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_items_id")
-    private int portfolioItemsId;
-
 	@Override
 	public String toString() {
-		return "IndustryEquivalency [id=" + id + ", months=" + months + ", technology=" + technology
+		return "IndustryEquivalency [id=" + portfolioItemsId + ", months=" + months + ", technology=" + technology
 				+ ", portfolioItemsId=" + portfolioItemsId + "]";
 	}
 	

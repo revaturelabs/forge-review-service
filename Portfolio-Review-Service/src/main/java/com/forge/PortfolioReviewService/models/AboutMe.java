@@ -21,24 +21,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "About_Me_Table")
 @Generated()
-public class AboutMe{
+public class AboutMe extends PortfolioItems {
+
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "portfolio_items_id")
+	private int portfolioItemsId;
 	
-	@Id
-	@Column(name = "about_me_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
+	@Column(name = "priority", columnDefinition = "int DEFAULT 1")
+	private int priority;
+
 	@Column(name = "description")
 	private String description;
-	
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "portfolio_items_id")
-    private int portfolioItemsId;
-	
-	
-	
+
 	@Override
 	public String toString() {
-		return "AboutMe [id=" + id + ", description=" + description + ", portfolio_iems_id=" + portfolioItemsId + "]";
+		return "AboutMe [id=" + portfolioItemsId + ", description=" + description + ", portfolio_iems_id=" + portfolioItemsId + "]";
 	}
 }

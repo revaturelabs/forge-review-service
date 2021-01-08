@@ -27,12 +27,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "education")
 @Generated()
-public class Education{
+public class Education extends PortfolioItems{
+	
+	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
+	@JoinColumn(name="portfolio_items_id", nullable=false)
+	private int portfolioItemsId;
 
-	@Id
-	@Column(name = "education_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@Column(name = "priority", columnDefinition = "int DEFAULT 2")
+	private int priority;
 	
 	@Column(name = "university")
 	private String university;
@@ -49,13 +51,11 @@ public class Education{
 	@Column(name = "degree")
 	private String degree;
 	
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_items_id", nullable=false)
-	private int portfolioItemsId;
+
 	
 	@Override
 	public String toString() {
-		return "Education [id=" + id + ", university=" + university + ", graduation=" + graduation + ", major=" + major
+		return "Education [id=" + portfolioItemsId + ", university=" + university + ", graduation=" + graduation + ", major=" + major
 				+ ", minor=" + minor + ", degree=" + degree + ", portfolioItemId=" + portfolioItemsId + "]";
 	}
 }

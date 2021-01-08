@@ -10,12 +10,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.forge.PortfolioReviewService.PortfolioReviewServiceApplication;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.Project;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
+import com.forge.PortfolioReviewService.repository.ProjectRepo;
+import com.forge.PortfolioReviewService.repository.UserRepo;
 
-@SpringBootTest
+@SpringBootTest(classes = PortfolioReviewServiceApplication.class)
 class PortfolioGenerationServiceApplicationTests {
 //
 //	@Test
@@ -24,7 +27,10 @@ class PortfolioGenerationServiceApplicationTests {
 //	
 	@MockBean
 	private PortfolioRepo portfolioRepo;
-	
+	@MockBean
+	private UserRepo uRepo;
+	@MockBean
+	private ProjectRepo projRepo;
 	
 	@Test
     public void testSaveNewPotfolio() {
@@ -40,16 +46,15 @@ class PortfolioGenerationServiceApplicationTests {
         pI.setItems(projList);
         List<PortfolioItems> potList = new ArrayList<PortfolioItems>();
         potList.add(pI);
-        Portfolio port1 = new Portfolio(2, "pending", 1, potList);
+        Portfolio port1 = new Portfolio(2, "pending", uRepo.findByUserId(1), potList);
         
-      
-        //Portfolio result = portfolioRepo.findById(1);
-        //portfolioRepo.save(new Portfolio(2, "pending", 1, potList));
+ 
         
         when(portfolioRepo.findById(2)).thenReturn(port1);
-
+        when(projRepo.findById(1)).thenReturn(p1);
     
        assertEquals(port1, portfolioRepo.findById(2));
+       assertEquals(p1, projRepo.findById(1));
     }
 
 }

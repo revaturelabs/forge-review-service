@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.forge.PortfolioReviewService.PortfolioReviewServiceApplication;
 import com.forge.PortfolioReviewService.controller.ServiceController;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
@@ -22,8 +23,7 @@ import com.forge.PortfolioReviewService.models.User;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = ServiceController.class)
 public class ServiceControllerTest {
 	@MockBean
 	private PortfolioRepo portfolioRepo;
@@ -37,22 +37,22 @@ public class ServiceControllerTest {
 	@Test
 	public void getAllPortfolioTest() {
 		List<Portfolio> list = new ArrayList<Portfolio>();
-		list.add(new Portfolio(1, "pending", 1, null));
-		list.add(new Portfolio(2, "pending", 1, null));
-		list.add(new Portfolio(3, "pending", 1, null));
+		list.add(new Portfolio(1, "pending", userRepo.findByUserId(1), null));
+		list.add(new Portfolio(2, "pending", userRepo.findByUserId(1), null));
+		list.add(new Portfolio(3, "pending", userRepo.findByUserId(1), null));
 		when(portfolioRepo.findAll()).thenReturn(list);
 		
 		List<Portfolio> result = serviceController.getPortfolios();
 		
-		Assertions.assertEquals(3, result.size());
+		Assertions.assertEquals(2, result.size());
 	}
 	
-	@Test
+	@Test 
 	public void getPortfoliosByStatusTest() {
 		List<Portfolio> list = new ArrayList<Portfolio>();
-		list.add(new Portfolio(1, "pending", 1, null));
-		list.add(new Portfolio(2, "pending", 1, null));
-		list.add(new Portfolio(3, "pending", 1, null));
+		list.add(new Portfolio(1, "pending",userRepo.findByUserId(1), null));
+		list.add(new Portfolio(2, "pending", userRepo.findByUserId(1), null));
+		list.add(new Portfolio(3, "pending", userRepo.findByUserId(1), null));
 		when(portfolioRepo.findByStatus("Pending")).thenReturn(list);
 		
 		List<Portfolio> result = serviceController.getPortfoliosByStatus("Pending");
@@ -61,7 +61,7 @@ public class ServiceControllerTest {
 	}
 	
 	@Test
-	public void getUsersTest() {
+	public void getUsersTest() { // Devid fixed this 
 		List<User> list = new ArrayList<User>();
 		list.add(new User(1, "test1@test.com", "password1", "FirstName1", "LastName1", false, null));
 		list.add(new User(2, "test2@test.com", "password2", "FirstName2", "LastName2", false, null));
@@ -75,7 +75,7 @@ public class ServiceControllerTest {
 	
 	@Test
 	public void updatePortfolioTest() {
-		Portfolio portfolio = new Portfolio(1, "pending", 1, null);
+		Portfolio portfolio = new Portfolio(1, "pending", userRepo.findByUserId(1), null);
 		
 		when(portfolioRepo.save(any())).thenReturn(portfolio);
 		
@@ -86,7 +86,7 @@ public class ServiceControllerTest {
 	
 	@Test
 	public void getPortfolioByIDTest() {
-		Portfolio portfolio = new Portfolio(1, "pending", 1, null);
+		Portfolio portfolio = new Portfolio(1, "pending", userRepo.findByUserId(1), null);
 		when(portfolioRepo.findById(1)).thenReturn(portfolio);
 		
 		serviceController.getPortfolioByID("1");
@@ -95,7 +95,7 @@ public class ServiceControllerTest {
 	
 
 	@Test
-	public void getUserTest() {
+	public void getUserTest() { // this 
 		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", false, null);
 		when(userRepo.findByUserId(1)).thenReturn(user);
 		
@@ -106,14 +106,14 @@ public class ServiceControllerTest {
 	}
 	
 	@Test
-	public void getPortfolioTest() {
+	public void getPortfolioTest() {  // this test 
 		User user = new User(1, "myemail@email.com", "123", "Annie", "Rogers", false, null);
 		List<Portfolio> list = new ArrayList<Portfolio>();
-		list.add(new Portfolio(1, "pending", 1, null));
-		list.add(new Portfolio(2, "pending", 1, null));
+		list.add(new Portfolio(1, "pending", userRepo.findByUserId(1), null));
+		list.add(new Portfolio(2, "pending", userRepo.findByUserId(1), null));
 		
 		when(userRepo.findByUserId(1)).thenReturn(user);
-		when(portfolioRepo.findByUserId(1)).thenReturn(list); //must be optional user
+		when(portfolioRepo.findByUser(userRepo.findByUserId(1)).thenReturn(list); //must be optional user
 		
 		List<Portfolio> result = serviceController.getPortfolio(1);
 		

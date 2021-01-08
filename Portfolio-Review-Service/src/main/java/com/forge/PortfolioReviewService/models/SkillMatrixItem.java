@@ -2,6 +2,7 @@ package com.forge.PortfolioReviewService.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,26 +25,20 @@ import lombok.NoArgsConstructor;
 @Table(name = "skill_matrix_item")
 //@EqualsAndHashCode(exclude = {"skillMatrixItems"})
 @Generated()
+@Embeddable
 public class SkillMatrixItem {
 
-	@Id
-	@Column(name = "skill_matrix_item_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
 	
 	@Column(name = "name")
 	private String name;
 	
 	@Column(name = "experience")
 	private String experience;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="skill_matrix_id", nullable=false)
-	@JsonBackReference(value="skillMatrix")
-	private SkillMatrix skillMatrix;
+
+
 	
 	@Override
 	public String toString() {
-		return "SkillMatrixItem [id=" + id + ", name=" + name + ", experience=" + experience + "]";
+		return "SkillMatrixItem [" + "name=" + name + ", experience=" + experience + "]";
 	}
 }
