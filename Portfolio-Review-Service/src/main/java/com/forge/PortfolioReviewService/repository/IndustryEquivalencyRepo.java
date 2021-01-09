@@ -13,7 +13,7 @@ public interface IndustryEquivalencyRepo extends JpaRepository<IndustryEquivalen
 	
 	public List<IndustryEquivalency> findAll();
 	
-	public IndustryEquivalency findById(int id);
+	//public IndustryEquivalency findById(int id);
 	
 	public void delete(IndustryEquivalency industryEq);
 }

@@ -22,23 +22,30 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "skill_matrix_item")
+@Table(name = "skill_matrix_items")
 //@EqualsAndHashCode(exclude = {"skillMatrixItems"})
-@Generated()
-@Embeddable
-public class SkillMatrixItem {
-
+public class SkillMatrixItems {
 	
-	@Column(name = "name")
-	private String name;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="skill_matrix_id", insertable=false, updatable=false)
+	@JsonBackReference(value="skillMatrix")
+	private SkillMatrix skillMatrix;
+	
+	@Id
+	@Column(name = "skill_matrix_item_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int skillMatrixItemId;
+	
+	@Column(name = "skill_name")
+	private String skillName;
 	
 	@Column(name = "experience")
 	private String experience;
 
 
-	
+
 	@Override
 	public String toString() {
-		return "SkillMatrixItem [" + "name=" + name + ", experience=" + experience + "]";
+		return "SkillMatrixItems [" + "name=" + skillName + ", experience=" + experience + "]";
 	}
 }

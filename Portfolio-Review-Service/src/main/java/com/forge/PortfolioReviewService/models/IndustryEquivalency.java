@@ -2,6 +2,7 @@ package com.forge.PortfolioReviewService.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,22 +20,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name="IE")
 @Table(name = "industry_equivalency")
-@Generated()
+@DiscriminatorValue(value="IE")
 public class IndustryEquivalency extends PortfolioItems{
 
 	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_items_id", nullable=false)
+	@JoinColumn(name="portfolio_items_id", nullable=false, insertable=false, updatable=false)
 	private int portfolioItemsId;
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 3")
 	private int priority;
 	
-	@Column(name = "months", nullable = false)
+	@Column(name = "months")
 	private int months;
 	
-	@Column(name = "technology", nullable = false)
+	@Column(name = "technology")
 	private String technology;
 	
 

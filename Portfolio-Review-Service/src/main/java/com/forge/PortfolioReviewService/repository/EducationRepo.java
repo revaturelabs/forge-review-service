@@ -11,8 +11,8 @@ import com.forge.PortfolioReviewService.models.Education;
 public interface EducationRepo extends JpaRepository<Education, Integer>{
 
 	
-	public List<Education> findAll();
+	//public List<Education> findAll();
 	
-	public Education findById(int id);
+	//public Education findById(int id);
 
 }

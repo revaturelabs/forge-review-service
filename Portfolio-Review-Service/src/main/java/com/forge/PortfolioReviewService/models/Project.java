@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,21 +27,21 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name="P")
 @Table(name = "project")
 @EqualsAndHashCode
-@Generated()
+@DiscriminatorValue(value="P")
 public class Project extends PortfolioItems{
 
 	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_items_id", nullable=false)
+	@JoinColumn(name = "portfolio_items_id", insertable=false, updatable=false)
 	private int portfolioItemsId;
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 5")
 	private int priority;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "project_name")
+	private String pName;
 	
 	@Column(name = "description")
 	private String description;
