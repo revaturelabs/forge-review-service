@@ -25,14 +25,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="EDU")
+@Entity(name="education")
 @Table(name = "education")
-@DiscriminatorValue(value="EDU")
 public class Education extends PortfolioItems{
 	
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "portfolio_items_id", insertable=false, updatable=false)
-	private int portfolioItemsId;
+	@Column(name = "item_type")
+	private String itemType= "Education" ;
+
+	@Column(name = "education_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int educationNo;
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 2")
 	private int priority;
@@ -41,7 +43,7 @@ public class Education extends PortfolioItems{
 	private String university;
 	
 	@Column(name = "graduation")
-	private Date graduation;
+	private String graduation;
 	
 	@Column(name = "major")
 	private String major;
@@ -54,9 +56,9 @@ public class Education extends PortfolioItems{
 	
 
 	
-	@Override
-	public String toString() {
-		return "Education [id=" + portfolioItemsId + ", university=" + university + ", graduation=" + graduation + ", major=" + major
-				+ ", minor=" + minor + ", degree=" + degree + ", portfolioItemId=" + portfolioItemsId + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Education [id=" + portfolioItemsId + ", university=" + university + ", graduation=" + graduation + ", major=" + major
+//				+ ", minor=" + minor + ", degree=" + degree + ", portfolioItemId=" + portfolioItemsId + "]";
+//	}
 }

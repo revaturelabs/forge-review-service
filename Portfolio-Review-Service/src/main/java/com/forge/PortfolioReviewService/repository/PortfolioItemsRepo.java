@@ -5,7 +5,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 
-@NoRepositoryBean
+//@NoRepositoryBean
 public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Integer> {
 
 }

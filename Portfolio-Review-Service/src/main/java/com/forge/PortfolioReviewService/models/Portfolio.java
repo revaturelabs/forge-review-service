@@ -36,7 +36,7 @@ public class Portfolio {
 	@Id
 	@Column(name = "portfolio_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	public int id;
 
 	@Column(name = "status", nullable = false, columnDefinition="varchar(255) DEFAULT 'pending'")
 	private String status;
@@ -48,8 +48,8 @@ public class Portfolio {
 	private User user;
 	
 	@JsonManagedReference
-	@OneToMany(mappedBy = "portfolio", targetEntity=PortfolioItems.class)
-	private List<PortfolioItems> portfolioSection = new ArrayList<PortfolioItems>();
+	@OneToMany(mappedBy = "portfolio", targetEntity=PortfolioItems.class, cascade = CascadeType.ALL)
+	private List<PortfolioItems> portfolioSections = new ArrayList<PortfolioItems>();
 	
 	
 	@Override

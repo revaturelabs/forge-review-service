@@ -24,10 +24,12 @@ import lombok.NoArgsConstructor;
 @Table(name = "industry_equivalency")
 @DiscriminatorValue(value="IE")
 public class IndustryEquivalency extends PortfolioItems{
-
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_items_id", nullable=false, insertable=false, updatable=false)
-	private int portfolioItemsId;
+	
+	@Column(name = "item_type")
+	private String itemType= "IndustryEquivalency";
+	
+	@Column(name = "industry_equivalency_id")
+	private int id;
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 3")
 	private int priority;
@@ -39,11 +41,11 @@ public class IndustryEquivalency extends PortfolioItems{
 	private String technology;
 	
 
-	@Override
-	public String toString() {
-		return "IndustryEquivalency [id=" + portfolioItemsId + ", months=" + months + ", technology=" + technology
-				+ ", portfolioItemsId=" + portfolioItemsId + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "IndustryEquivalency [id=" + portfolioItemsId + ", months=" + months + ", technology=" + technology
+//				+ ", portfolioItemsId=" + portfolioItemsId + "]";
+//	}
 	
 	
 	

@@ -28,24 +28,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "portfolio_items")
 @Table(name = "portfolio_items")
 @EqualsAndHashCode()
-@DiscriminatorValue(value="PI")
-
 /* Wrapper class for potfolio section bean that includes some extra metadata 
  * such as the title of the section, it's priority in the portfolio
  *  and loosely coupling the individuals beans from the portfolio instance
  * */
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
 public abstract class PortfolioItems {
 	
-
-
-//	@JsonIgnore
-//	@Transient 
-//	private static final String SIMPLE_NAME = PortfolioItems.class.getSimpleName();
 	
 	@Id
 	@Column(name = "portfolio_items_id")

@@ -32,10 +32,13 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 @DiscriminatorValue(value="P")
 public class Project extends PortfolioItems{
-
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "portfolio_items_id", insertable=false, updatable=false)
-	private int portfolioItemsId;
+	
+	@Column(name = "item_type")
+	private String itemType= "Project";
+	
+	@Column(name = "project_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 5")
 	private int priority;
