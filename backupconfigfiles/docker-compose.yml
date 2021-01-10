@@ -1,0 +1,16 @@
+version: '3.4'
+services:
+  forgebackend:
+    build:
+      context: ForgeBackEnd/
+    image: forgebackend
+    ports:
+      - '8080:3000'
+  forge:
+    build:
+      context: "Forge/"
+    image: forge
+    env_file:
+      - "./Forge/.env"
+    ports:
+      - 4200:3000
