@@ -1,6 +1,5 @@
 package PortfolioReviewService;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -11,12 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.forge.PortfolioReviewService.PortfolioReviewServiceApplication;
 import com.forge.PortfolioReviewService.controller.EmailController;
 import com.forge.PortfolioReviewService.models.Email;
 import com.forge.PortfolioReviewService.repository.EmailServiceImpl;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = PortfolioReviewServiceApplication.class)
 class EmailControllerTest {
 
 	@Autowired
@@ -37,11 +37,11 @@ class EmailControllerTest {
 		
 		Email email = new Email(firstName, userEmail, subject, portfolioStatus, feedback, portfolioId, null);
 		emailController.sendEmail(email);
-		verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles.\n\nYour Portfolio number -1 has been tested. Your reviewer has left the following feedback:\n\n"+feedback+"\n\nThanks for submitting your portfolio.");
+		verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles\n\nYour portfolio number -1 has been tested. Your reviewer has left the following feedback: \n\n"+feedback+"\n\nThanks for submitting your portfolio.");
 		
 		email.setFeedBack("");
 		emailController.sendEmail(email);
-		verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles.\n\nYour Portfolio number -1 has been tested.\n\nThanks for submitting your portfolio.");
+		verify(esi, times(1)).send(email.getUserEmail(),"Hello, Charles\n\nYour portfolio number -1 has been tested. Your reviewer has left the following feedback: \n\n\n\nThanks for submitting your portfolio.");
 		
 	}
 }
