@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -214,12 +215,13 @@ public class ServiceController {
 	@GetMapping("/getPortfolios/{id}")
 	@ApiOperation(value="Getting a specific portfolio",
 	  			  notes = "Retrieving a specific portfolio from a user to review")
-	public List<Portfolio> getPortfolio(@PathVariable(value="id") @RequestParam int id) {
+	public ResponseEntity<List<Portfolio>> getPortfolio(@PathVariable(value="id") int id) {
 
 		User user = userRepo.findByUserId(id);
 		List<Portfolio> port = portfolioRepo.findAllByUser(user);
 		System.out.println(port);
-		return port;
+		return ResponseEntity.ok().body(port);
+		//return port;
 
 	}	
 
