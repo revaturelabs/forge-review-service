@@ -121,7 +121,7 @@ public class ServiceController {
 	
 	//bug fix modified method 1/1 no longer using this 1/2 its still going to this method
 	//added user id parameter 
-	@GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/getUserById/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 //	@ApiOperation(value="Getting a user for verification",
 //	  			  notes = "Retrieving a specific user so they can login in accordingly")
 	public User getUser(@RequestParam int id) {
@@ -211,13 +211,15 @@ public class ServiceController {
 	 Input user id.
 	 Returns a list of portfolios?
 	 */
-	@GetMapping("/getPortfolios")
+	@GetMapping("/getPortfolios/{id}")
 	@ApiOperation(value="Getting a specific portfolio",
 	  			  notes = "Retrieving a specific portfolio from a user to review")
-	public List<Portfolio> getPortfolio(@RequestParam int id) {
+	public List<Portfolio> getPortfolio(@PathVariable(value="id") @RequestParam int id) {
 
 		User user = userRepo.findByUserId(id);
-		return portfolioRepo.findAllByUser(user);
+		List<Portfolio> port = portfolioRepo.findAllByUser(user);
+		System.out.println(port);
+		return port;
 
 	}	
 
