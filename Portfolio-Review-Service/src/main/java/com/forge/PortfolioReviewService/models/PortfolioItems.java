@@ -18,6 +18,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,7 +39,7 @@ import lombok.NoArgsConstructor;
  * */
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
-public abstract class PortfolioItems {
+public class PortfolioItems {
 	
 	
 	@Id
@@ -48,6 +50,7 @@ public abstract class PortfolioItems {
 	@JsonBackReference
 	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable = false,  referencedColumnName = "portfolio_id")
+	@JsonProperty(access = Access.READ_ONLY)
 	private Portfolio portfolio;
 	
 //	priority value could bE used to set order in future sprints

@@ -125,7 +125,7 @@ public class ServiceController {
 	@GetMapping(value="/getUserById/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 //	@ApiOperation(value="Getting a user for verification",
 //	  			  notes = "Retrieving a specific user so they can login in accordingly")
-	public User getUser(@RequestParam int id) {
+	public User getUser(@PathVariable(value="id") int id) {
 		return userRepo.findByUserId(id);
 	}
 
@@ -158,6 +158,8 @@ public class ServiceController {
 	  			  notes ="Updating a portfolio from a specific user")
 	public void updatePortfolio(@RequestBody Portfolio portfolio) {
 		System.out.println("Received portfolio " + portfolio);
+		User thisUser = portfolioRepo.findById(portfolio.id).getUser();
+		portfolio.setUser(thisUser);
 		portfolioRepo.save(portfolio);
 	}
 

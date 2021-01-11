@@ -49,12 +49,14 @@ public class PortfolioUpdateController {
 	
 	//needs testing to determine whether portfolio info is necessary
 	//uniform method for updating any
-	@PutMapping("/updatePortfolioItems")
+	//must pass in portfolio Id
+	@PutMapping("/updatePortfolioItems/{pid}")
 	@ApiOperation(value="Updating the Project Technology Section",
 	  			  notes = "Updating the project technology section")
-	public String updatePortfolioItems(@RequestBody PortfolioItems portfolioItems) {
-		portfolioItems.getPortfolio().getId();
+	public String updatePortfolioItems(@PathVariable(value = "pid")int id, @RequestBody PortfolioItems portfolioItems) {
+		portfolioItems.setPortfolio(portfolioRepo.findById(id));
 		portfolioItemsRepo.save(portfolioItems);
+		System.out.println(portfolioItems);
 		return "Success!";
 	}
 	

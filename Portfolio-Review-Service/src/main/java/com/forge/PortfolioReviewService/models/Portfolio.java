@@ -13,10 +13,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,6 +46,7 @@ public class Portfolio {
 	@JsonBackReference
 	@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
+	@JsonProperty(access = Access.READ_ONLY)
 	private User user;
 	
 	@JsonManagedReference
