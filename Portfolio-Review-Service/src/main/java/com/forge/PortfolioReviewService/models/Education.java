@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,21 +25,25 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name="education")
 @Table(name = "education")
-@Generated()
-public class Education{
+public class Education extends PortfolioItems{
+	
+	@Column(name = "item_type")
+	private String itemType= "Education" ;
 
-	@Id
 	@Column(name = "education_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int educationNo;
+
+	@Column(name = "priority", columnDefinition = "int DEFAULT 2")
+	private int priority;
 	
 	@Column(name = "university")
 	private String university;
 	
 	@Column(name = "graduation")
-	private Date graduation;
+	private String graduation;
 	
 	@Column(name = "major")
 	private String major;
@@ -49,13 +54,11 @@ public class Education{
 	@Column(name = "degree")
 	private String degree;
 	
-	@ManyToOne(targetEntity = PortfolioItems.class, cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_items_id", nullable=false)
-	private int portfolioItemsId;
+
 	
-	@Override
-	public String toString() {
-		return "Education [id=" + id + ", university=" + university + ", graduation=" + graduation + ", major=" + major
-				+ ", minor=" + minor + ", degree=" + degree + ", portfolioItemId=" + portfolioItemsId + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Education [id=" + portfolioItemsId + ", university=" + university + ", graduation=" + graduation + ", major=" + major
+//				+ ", minor=" + minor + ", degree=" + degree + ", portfolioItemId=" + portfolioItemsId + "]";
+//	}
 }

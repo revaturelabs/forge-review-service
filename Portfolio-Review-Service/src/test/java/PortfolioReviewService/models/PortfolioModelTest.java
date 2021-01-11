@@ -19,41 +19,44 @@ import com.forge.PortfolioReviewService.models.SkillMatrix;
 
 class PortfolioModelTest {
 	
-	//Review
-	@Test
-	public void portfolioItemTest() {
-		PortfolioItems pI = new PortfolioItems();
-		AboutMe am = new AboutMe();
+	 // test build PortfolioItems list of different PI.
+   @Test
+   void portfolioItemTest() {
 
-		Education e1 = new Education();
-		Education e2 = new Education();
-		List<Education> eduList = new ArrayList<Education>();
-		eduList.add(e1);
-		eduList.add(e2);
-		pI.setItems(eduList);
+       AboutMe am = new AboutMe();
 
-		
-		assertNotNull(pI);
+       Education e1 = new Education();
+       Education e2 = new Education();
+       List<PortfolioItems> pIList = new ArrayList<PortfolioItems>();
+       pIList.add(e1);
+       pIList.add(e2);
+       pIList.add(am);
 
-		assertEquals(2, eduList.size());
-	}
-	
-	//Review
-	@Test
-    public void buildLooselyCoupledPortfolio() { //poggers
-        Portfolio p = new Portfolio();
-        p.setId(1);
-        p.setStatus("Pending");
-        Education ed1 = new Education();
-        Education ed2 = new Education();
-        List<Education> edList = new ArrayList<Education>();
-        edList.add(ed1);
-        edList.add(ed2);
-        PortfolioItems educationItems = new PortfolioItems(1, 1, 1, "Education", edList);
-        p.getPortfolioSection().add(educationItems);
-        
-        assertEquals(p.getPortfolioSection().size(), 1);
-        assertEquals(p.getPortfolioSection().get(0).getItems().get(0), ed1);
-    }
+       assertEquals(3, pIList.size());
+   }
+
+   //Review
+   @Test
+  void buildLooselyCoupledPortfolioTest() { 
+       Portfolio p = new Portfolio();
+       p.setId(1);
+       p.setStatus("Pending");
+       Education ed1 = new Education();
+       ed1.setPortfolioItemId(1);
+       ed1.setPriority(1);
+       ed1.setItemType("Education");
+
+       Education ed2 = new Education();
+       ed2.setPortfolioItemId(1);
+       ed2.setPriority(1);
+       ed2.setItemType("Education");
+       List<PortfolioItems> edList = new ArrayList<PortfolioItems>();
+       edList.add(ed1);
+       edList.add(ed2);
+              // PortfolioItems educationItems = new PortfolioItems(1, 1, 1, "Education", edList);
+       p.setPortfolioSections(edList);
+              assertEquals(2,p.getPortfolioSections().size());
+       assertEquals(p.getPortfolioSections().get(0), ed1);
+   }
 
 }

@@ -1,11 +1,12 @@
 package com.forge.PortfolioReviewService.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.forge.PortfolioReviewService.models.AboutMe;
+import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.Portfolio;
+import com.forge.PortfolioReviewService.models.PortfolioItems;
+import com.forge.PortfolioReviewService.models.SkillMatrix;
+import com.forge.PortfolioReviewService.models.SkillMatrixItems;
 import com.forge.PortfolioReviewService.models.User;
+import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
 
@@ -37,15 +42,49 @@ public class ServiceController {
 	@Autowired
 	private UserRepo userRepo;
 	
+	@Autowired
+	private PortfolioItemsRepo portfolioItemsRepo;
+	
+	
+	
 	/*
  	Gets all portfolios from the database.
 	Returns a lists of all portfolios.
 	 */
-	@GetMapping("/getAllPortfolios")
-	@ApiOperation(value="Getting all portofios",
+	@GetMapping("/getTest1")
+	@ApiOperation(value="Getting all portfolios",
 	  			  notes = "Retrieving all the portfolios to view them")
-	public List<Portfolio> getPortfolios(){
-		List<Portfolio> myList = portfolioRepo.findAll();
+	public Portfolio getPortfolios(){
+		AboutMe newA = new AboutMe("s",1,1, "all bananas");
+		PortfolioItems newE = new Education("s",1, 1,"UGA", "May 2020","IT", "N/A", "Bach o It");
+		
+		List<SkillMatrixItems> newSMIL = new ArrayList<SkillMatrixItems>();
+	    SkillMatrix newSM = new SkillMatrix("s", 1, 1, "sick tricks", newSMIL);
+	    SkillMatrixItems newMI = new SkillMatrixItems(newSM,1,"YER","5");
+	    newSMIL.add(newMI);
+		newA.setPortfolio(portfolioRepo.findById(1));
+		newE.setPortfolio(portfolioRepo.findById(1));
+		newSM.setPortfolio(portfolioRepo.findById(1));
+		List<PortfolioItems> PI = new ArrayList<PortfolioItems>();
+		PI.add(newSM);
+		PI.add(newA);
+		PI.add(newE);
+		portfolioRepo.findById(1).setPortfolioSections(PI);
+		portfolioRepo.save(portfolioRepo.findById(1));
+		//potIRepo.save(newE);
+		Portfolio myList = portfolioRepo.findById(1);
+		return myList;
+	}
+	
+	@GetMapping("/getTest2")
+	@ApiOperation(value="Getting all portfolios",
+	  			  notes = "Retrieving all sthe portfolios to view them")
+	public List<PortfolioItems> getPortfolioItems(){
+		PortfolioItems newA = new AboutMe("s",1,1, "all bananas");
+		newA.setPortfolio(portfolioRepo.findById(1));
+		portfolioItemsRepo.save(newA);
+		List<PortfolioItems> myList = portfolioItemsRepo.findAll();
+		//List<PortfolioItems> myList = potIRepo.findAll();
 		return myList;
 	}
 	
@@ -80,12 +119,13 @@ public class ServiceController {
  	Input is user id.
 	Returns one user.
 	 */
-//	//bug fix modified method 1/1 no longer using this 1/2 its still going to this method
-//	//added user id parameter 
-	@GetMapping(value="/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+	
+	//bug fix modified method 1/1 no longer using this 1/2 its still going to this method
+	//added user id parameter 
+	@GetMapping(value="/getUserById/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 //	@ApiOperation(value="Getting a user for verification",
 //	  			  notes = "Retrieving a specific user so they can login in accordingly")
-	public User getUser(@RequestParam int id) {
+	public User getUser(@PathVariable(value="id") int id) {
 		return userRepo.findByUserId(id);
 	}
 
@@ -95,8 +135,8 @@ public class ServiceController {
  	Input is user object.
  	No output, but user info is saved into database.
 	 */
-  @PostMapping("/createUser")
-  @ApiOperation(value = "Creating a new user",
+	@PostMapping("/createUser")
+  	@ApiOperation(value = "Creating a new user",
 		  		notes = "Sending user information to the database")
 	public void saveUser(@RequestBody User u) {
 		System.out.println(u);
@@ -118,6 +158,8 @@ public class ServiceController {
 	  			  notes ="Updating a portfolio from a specific user")
 	public void updatePortfolio(@RequestBody Portfolio portfolio) {
 		System.out.println("Received portfolio " + portfolio);
+		User thisUser = portfolioRepo.findById(portfolio.id).getUser();
+		portfolio.setUser(thisUser);
 		portfolioRepo.save(portfolio);
 	}
 
@@ -134,7 +176,7 @@ public class ServiceController {
 		return user;
 	}
 	
-
+//
 	@GetMapping("/getPortfolioByID/{id}")
 //	@ApiOperation(value="Getting a portfolio by Id",
 //	  			  notes = "Retrieving a specific portfolio from a user")
@@ -151,15 +193,17 @@ public class ServiceController {
 	 No output, because portfolio is saved in database.
 	 */
 
-
 	//bug fix fixing this 
-	@ResponseStatus(HttpStatus.CREATED)
+//	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/createPortfolio/{id}")
 //	@ApiOperation(value="Adding a Portfolios",
 //	  			 notes ="Adding a portfolio to a specific user")
     public Portfolio createPortfolio(@PathVariable(value="id") int id ,@RequestBody Portfolio portfolio) {
 		User user = userRepo.findByUserId(id);
 		portfolio.setStatus("Pending");
+		portfolio.setUser(user);
+		
+
 		return portfolioRepo.save(portfolio);
 
     }
@@ -170,13 +214,16 @@ public class ServiceController {
 	 Input user id.
 	 Returns a list of portfolios?
 	 */
-	@GetMapping("/getPortfolio")
+	@GetMapping("/getPortfolios/{id}")
 	@ApiOperation(value="Getting a specific portfolio",
 	  			  notes = "Retrieving a specific portfolio from a user to review")
-	public List<Portfolio> getPortfolio(@RequestParam int id) {
+	public ResponseEntity<List<Portfolio>> getPortfolio(@PathVariable(value="id") int id) {
 
-		
-		return portfolioRepo.findAllByUserId(id);
+		User user = userRepo.findByUserId(id);
+		List<Portfolio> port = portfolioRepo.findAllByUser(user);
+		System.out.println(port);
+		return ResponseEntity.ok().body(port);
+		//return port;
 
 	}	
 
