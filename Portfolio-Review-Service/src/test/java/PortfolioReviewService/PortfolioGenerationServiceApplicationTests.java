@@ -5,14 +5,18 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import com.forge.PortfolioReviewService.models.Criteria;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.Project;
+import com.forge.PortfolioReviewService.repository.CriteriaRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 
 @SpringBootTest
@@ -51,5 +55,5 @@ class PortfolioGenerationServiceApplicationTests {
     
        assertEquals(port1, portfolioRepo.findById(2));
     }
-
+	
 }
