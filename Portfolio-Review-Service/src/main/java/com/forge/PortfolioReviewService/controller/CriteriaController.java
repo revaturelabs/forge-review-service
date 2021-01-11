@@ -34,8 +34,6 @@ public class CriteriaController {
 		return myList;
 	}
 
-	
-	//@PostMapping("/{id}")
 	@PostMapping(value="update/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	public Criteria updateCriteriaByid(@PathVariable(value="id") int id, @Valid @RequestBody Criteria criteria) {
 		//int criteriaId=Integer.valueOf(id);
@@ -49,9 +47,9 @@ public class CriteriaController {
 		
 	}
 	
-	@GetMapping("/{id}")
-	public Criteria findCriteriaById(@PathVariable(value="id") int id) {
-		return criteriaRepo.findById(id);
+	@GetMapping("/{name}")
+	public Criteria findCriteriaByName(@PathVariable(value="name") String name) {
+		return criteriaRepo.findByName(name);
 	}
 	
 
