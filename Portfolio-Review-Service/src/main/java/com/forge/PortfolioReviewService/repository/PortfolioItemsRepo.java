@@ -8,4 +8,6 @@ import com.forge.PortfolioReviewService.models.PortfolioItems;
 //@NoRepositoryBean
 public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Integer> {
 
+	PortfolioItems savePI(int i, PortfolioItems portfolioItem);
+
 }

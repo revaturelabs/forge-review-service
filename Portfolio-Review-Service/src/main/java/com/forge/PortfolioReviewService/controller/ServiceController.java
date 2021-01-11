@@ -225,6 +225,17 @@ public class ServiceController {
 		return ResponseEntity.ok().body(port);
 		//return port;
 
-	}	
+	}
+	
+	@PutMapping("/updatePortfolio/{id}")
+	@ApiOperation(value="Updating PortfolioItems",
+	  			  notes ="Updating a portfolio from a specific user")
+	public PortfolioItems updatePortfolioItems(@PathVariable(value="id") int id, @RequestBody PortfolioItems portfolioItem) {
+		System.out.println("Received portfolioItems " + portfolioItem);
+		Portfolio portfolio = portfolioRepo.findById(id);
+		portfolioItem.setPortfolio(portfolio);
+		PortfolioItems portItem = portfolioItemsRepo.savePI(0, portfolioItem);
+		return portItem;
+	}
 
 }
