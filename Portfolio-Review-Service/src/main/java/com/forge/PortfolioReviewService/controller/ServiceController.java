@@ -20,12 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
+import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.SkillMatrix;
 import com.forge.PortfolioReviewService.models.SkillMatrixItems;
 import com.forge.PortfolioReviewService.models.User;
-
+import com.forge.PortfolioReviewService.repository.EducationRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
@@ -45,7 +46,10 @@ public class ServiceController {
 
 	@Autowired
 	private PortfolioItemsRepo portfolioItemsRepo;
-	
+
+	@Autowired
+	private EducationRepo educationRepo;
+
 
 	/*
 	 * Gets all portfolios from the database. Returns a lists of all portfolios.
@@ -147,8 +151,8 @@ public class ServiceController {
 	}
 
 	@PostMapping("/createEducationItem/{id}")
-//  @ApiOperation(value="Adds new Portfolio Items",
-//                 notes ="Adds a new portfolioItem to a specific portfolio")
+  @ApiOperation(value="Adds new Portfolio Education Item",
+                 notes ="Adds a new portfolioItem to a specific portfolio")
 	public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
 		System.out.println("Create Education");
 		System.out.println(education);
@@ -156,6 +160,19 @@ public class ServiceController {
 		PortfolioItems portItem = education;
 		return portfolioItemsRepo.save(portItem);
 	}
+
+	@PostMapping("/createIndustryItem/{id}")
+  @ApiOperation(value="Adds new Portfolio Industry Item",
+  				notes ="Adds a new portfolioItem to a specific portfolio")
+	public PortfolioItems createIndustryItem(@PathVariable(value = "id") int id, @RequestBody IndustryEquivalency industry) {
+		System.out.println("Create Industry");
+		System.out.println(industry);
+		industry.setPortfolio(portfolioRepo.getOne(id));
+		PortfolioItems portItem = industry;
+		return portfolioItemsRepo.save(portItem);
+	}
+	
+	
 
 //	@GetMapping("/getEducationItems/{id}")
 //	public List<Education> getEducationItem(@PathVariable(value = "id") int id) {
@@ -174,7 +191,7 @@ public class ServiceController {
 //		
 //		return portfolioItemsRepo.save(portItem);
 //	}
-	
+
 	/*
 	 * Gets portfolio by id. Input is portfolio id. Returns portfolio.
 	 */
@@ -253,6 +270,7 @@ public class ServiceController {
 	}
 
 	
+	//Don't think anything is happening here. Unused
 	@PutMapping("/updatePortfolio/{id}")
 	@ApiOperation(value="Updating PortfolioItems",
 	  			  notes ="Updating a portfolio from a specific user")
@@ -260,7 +278,7 @@ public class ServiceController {
 		System.out.println("Received portfolioItems " + portfolioItem);
 		Portfolio portfolio = portfolioRepo.findById(id);
 		portfolioItem.setPortfolio(portfolio);
-		PortfolioItems portItem = portfolioItemsRepo.savePI(0, portfolioItem);
+		PortfolioItems portItem = portfolioItemsRepo.save(portfolioItem);
 		return portItem;
 	}
 	
