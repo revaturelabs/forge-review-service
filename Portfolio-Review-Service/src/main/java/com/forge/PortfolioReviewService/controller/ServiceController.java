@@ -170,12 +170,12 @@ public class ServiceController {
 	 */
 
 	//trying something new this works 
-	@GetMapping(value="/getUser/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-	public Optional<User> getUserById(@PathVariable(value="id") int id) {
-		Optional<User> user = userRepo.findById(id);
-		return user;
-	}
-	
+//	@GetMapping(value="/getUser/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+//	public Optional<User> getUserById(@PathVariable(value="id") int id) {
+//		Optional<User> user = userRepo.findById(id);
+//		return user;
+//	}
+//	
 //
 	@GetMapping("/getPortfolioByID/{id}")
 //	@ApiOperation(value="Getting a portfolio by Id",
