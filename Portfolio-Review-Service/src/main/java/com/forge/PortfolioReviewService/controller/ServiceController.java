@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
+import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.SkillMatrix;
@@ -45,7 +46,7 @@ public class ServiceController {
 
 	@Autowired
 	private PortfolioItemsRepo portfolioItemsRepo;
-	
+
 	@Autowired
 	private EducationRepo educationRepo;
 
@@ -149,8 +150,8 @@ public class ServiceController {
 	}
 
 	@PostMapping("/createEducationItem/{id}")
-//  @ApiOperation(value="Adds new Portfolio Items",
-//                 notes ="Adds a new portfolioItem to a specific portfolio")
+  @ApiOperation(value="Adds new Portfolio Education Item",
+                 notes ="Adds a new portfolioItem to a specific portfolio")
 	public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
 		System.out.println("Create Education");
 		System.out.println(education);
@@ -158,6 +159,19 @@ public class ServiceController {
 		PortfolioItems portItem = education;
 		return portfolioItemsRepo.save(portItem);
 	}
+
+	@PostMapping("/createIndustryItem/{id}")
+  @ApiOperation(value="Adds new Portfolio Industry Item",
+  				notes ="Adds a new portfolioItem to a specific portfolio")
+	public PortfolioItems createIndustryItem(@PathVariable(value = "id") int id, @RequestBody IndustryEquivalency industry) {
+		System.out.println("Create Industry");
+		System.out.println(industry);
+		industry.setPortfolio(portfolioRepo.getOne(id));
+		PortfolioItems portItem = industry;
+		return portfolioItemsRepo.save(portItem);
+	}
+	
+	
 
 //	@GetMapping("/getEducationItems/{id}")
 //	public List<Education> getEducationItem(@PathVariable(value = "id") int id) {
@@ -176,7 +190,7 @@ public class ServiceController {
 //		
 //		return portfolioItemsRepo.save(portItem);
 //	}
-	
+
 	/*
 	 * Gets portfolio by id. Input is portfolio id. Returns portfolio.
 	 */

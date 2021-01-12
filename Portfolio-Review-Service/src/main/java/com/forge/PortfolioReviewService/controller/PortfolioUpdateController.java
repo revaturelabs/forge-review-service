@@ -43,10 +43,20 @@ public class PortfolioUpdateController {
 		return portfolioItemsRepo.findAll();
 
 	}
+	
+	@GetMapping("/getPortfolioItemsById/{id}")
+	@ApiOperation(value="Getting all portfolio items by id",
+	  notes = "Retrieving a all portfolio items by id from a user to review")
+	public List<PortfolioItems> getAllPortfolioItemsById(@PathVariable(value="id") int id) {
+		
+		
+		return portfolioItemsRepo.findAll();
 
-	// needs testing to determine whether portfolio info is necessary
-	// uniform method for updating any
-	// must pass in portfolio Id
+	}
+	
+	//needs testing to determine whether portfolio info is necessary
+	//uniform method for updating any
+	//must pass in portfolio Id
 	@PutMapping("/updatePortfolioItems/{pid}")
 	@ApiOperation(value = "Updating the Project Technology Section", notes = "Updating the project technology section")
 	public String updatePortfolioItems(@PathVariable(value = "pid") int id,
