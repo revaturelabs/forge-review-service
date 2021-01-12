@@ -206,10 +206,30 @@ public class ServiceController {
 	@PostMapping("/createPortfolio/{id}")
 //	@ApiOperation(value="Adding a Portfolios",
 //	  			 notes ="Adding a portfolio to a specific user")
-	public Portfolio createPortfolio(@PathVariable(value = "id") int id, @RequestBody Portfolio portfolio) {
+	@ResponseBody
+    public Portfolio createPortfolio(@PathVariable(value="id") int id) {
+		Portfolio portfolio = new Portfolio();
 		User user = userRepo.findByUserId(id);
 		portfolio.setStatus("Pending");
 		portfolio.setUser(user);
+		
+		portfolioRepo.save(portfolio);
+		int pid = portfolio.getId();
+		AboutMe newA = new AboutMe("AboutMe",1 ,1 , "testing");
+		PortfolioItems newE = new Education("Education",1, 1," ", " "," ", " ", " ");
+		List<SkillMatrixItems> newSMIL = new ArrayList<SkillMatrixItems>();
+	    SkillMatrix newSM = new SkillMatrix("Skills", 1, 1, "sick tricks", newSMIL);
+	    SkillMatrixItems newMI = new SkillMatrixItems(newSM,1,"YER","5");
+	    newSMIL.add(newMI);
+		newA.setPortfolio(portfolioRepo.findById(pid));
+		newE.setPortfolio(portfolioRepo.findById(pid));
+		newSM.setPortfolio(portfolioRepo.findById(pid));
+		List<PortfolioItems> PI = new ArrayList<PortfolioItems>();
+		PI.add(newSM);
+		PI.add(newA);
+		PI.add(newE);
+		portfolioRepo.findById(pid).setPortfolioSections(PI);
+		portfolioRepo.save(portfolioRepo.findById(pid));
 
 		return portfolioRepo.save(portfolio);
 

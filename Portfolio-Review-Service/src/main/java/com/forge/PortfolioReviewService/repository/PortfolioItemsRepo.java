@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.IndustryEquivalency;
@@ -38,5 +37,8 @@ public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Intege
 	public ArrayList<Education> findEdusByItemId(@Param("portfolioId") int portfolioId);
 
 //	PortfolioItems savePortfolioItems(int i, PortfolioItems portfolioItem);
+
+	public AboutMe findById(int id);
+	
 
 }

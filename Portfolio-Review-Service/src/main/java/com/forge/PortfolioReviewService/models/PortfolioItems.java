@@ -47,6 +47,7 @@ public class PortfolioItems {
 	@JsonProperty(access = Access.WRITE_ONLY)
 	protected Portfolio portfolio;
 
+
 	
 //	priority value could bE used to set order in future sprints
 
