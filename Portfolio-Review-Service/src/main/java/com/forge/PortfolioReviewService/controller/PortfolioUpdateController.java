@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.forge.PortfolioReviewService.models.AboutMe;
+import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
@@ -89,10 +91,25 @@ public class PortfolioUpdateController {
     public PortfolioItems createPortfolioItems(@PathVariable(value="id") int id ,@RequestBody PortfolioItems portfolioItem) {
 		portfolioItem.setPortfolio(portfolioRepo.findById(id));
 		System.out.println(portfolioItem);
-		return portfolioItem;
+		//return portfolioItem;
 		
+
+		return portfolioItemsRepo.save(portfolioItem);
+
+    }
+
+	@PostMapping("/createEducationItem/{id}")
+//	@ApiOperation(value="Adds new Portfolio Items",
+//	  			 notes ="Adds a new portfolioItem to a specific portfolio")
+    public PortfolioItems createEducationItem(@PathVariable(value="id") int id, @RequestBody Education education) {
+		education.setItemType("Education");
+		education.setPortfolio(portfolioRepo.findById(id));
+		PortfolioItems portItem = education;
 	
-		}
+		return portfolioItemsRepo.save(portItem);
+
+    }
+
 
 	//untested
 	@DeleteMapping("/deletePortfolioItem/{id}")

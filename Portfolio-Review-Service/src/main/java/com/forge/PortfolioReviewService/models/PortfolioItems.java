@@ -53,7 +53,7 @@ public class PortfolioItems {
 
 	@Override
 	public String toString() {
-		return "PortfolioItems [portfolioItemId=" + portfolioItemId + ", portfolio=" + portfolio + ", priority=" + "]";
+		return "PortfolioItems [portfolioItemId=" + portfolioItemId + ", portfolio=" + portfolio + "]";
 	}
 
 

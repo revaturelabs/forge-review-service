@@ -48,6 +48,7 @@ public class Portfolio {
 	@JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
 	@JsonProperty(access = Access.WRITE_ONLY) //write only???
 
+
 	private User user;
 	
 	@JsonManagedReference

@@ -18,7 +18,7 @@ public interface PortfolioRepo extends JpaRepository<Portfolio, Integer>{
 	public Portfolio findById(int id);
 	
 	public List<Portfolio> findByUser(User user); //edited this and final to test... was id
-	
+
 	@Query(value = "SELECT * FROM portfolio WHERE status =:status", nativeQuery = true)
 	public List<Portfolio> findByStatus(String status);
 
