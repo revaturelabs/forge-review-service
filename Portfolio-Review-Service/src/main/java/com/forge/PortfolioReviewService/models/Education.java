@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
@@ -30,11 +32,11 @@ import lombok.NoArgsConstructor;
 public class Education extends PortfolioItems{
 	
 	@Column(name = "item_type")
-	private String itemType= "Education" ;
-
-	@Column(name = "education_id")
+	protected String itemType;
+	
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int educationNo;
+	
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 2")
 	private int priority;

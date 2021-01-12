@@ -46,7 +46,7 @@ public class Portfolio {
 	@JsonBackReference
 	@ManyToOne(targetEntity=User.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="user_id", nullable=false, referencedColumnName = "user_id")
-	@JsonProperty(access = Access.AUTO)
+	@JsonProperty(access = Access.WRITE_ONLY) //write only???
 	private User user;
 	
 	@JsonManagedReference

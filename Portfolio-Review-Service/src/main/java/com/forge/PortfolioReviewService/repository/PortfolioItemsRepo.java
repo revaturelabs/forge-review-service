@@ -15,7 +15,7 @@ import com.forge.PortfolioReviewService.models.SkillMatrix;
 
 
 public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Integer> {
-	
+
 	
 	//find one
 	@Query(value="SELECT * FROM portfolio_items JOIN about_me ON portfolio_items.portfolio_items_id = about_me.portfolio_items_id WHERE portfolio_items.item_type='about_me' AND portfolio_id=:portfolioId", nativeQuery=true)
@@ -36,4 +36,7 @@ public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Intege
 	//findAll
 	@Query(value="SELECT * FROM portfolio_items JOIN education ON portfolio_items.portfolio_items_id = education.portfolio_items_id WHERE portfolio_items.item_type='education' AND portfolio_id=:portfolioId", nativeQuery=true)
 	public ArrayList<Education> findEdusByItemId(@Param("portfolioId") int portfolioId);
+
+//	PortfolioItems savePortfolioItems(int i, PortfolioItems portfolioItem);
+
 }

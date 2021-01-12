@@ -1,12 +1,7 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -50,8 +44,9 @@ public class PortfolioItems {
 	@JsonBackReference
 	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable = false,  referencedColumnName = "portfolio_id")
-	@JsonProperty(access = Access.AUTO)
-	private Portfolio portfolio;
+	@JsonProperty(access = Access.WRITE_ONLY)
+	protected Portfolio portfolio;
+
 	
 //	priority value could bE used to set order in future sprints
 
