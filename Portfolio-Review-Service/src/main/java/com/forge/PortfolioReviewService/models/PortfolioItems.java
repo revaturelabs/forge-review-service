@@ -1,12 +1,7 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +19,6 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -38,7 +32,7 @@ import lombok.NoArgsConstructor;
  *  and loosely coupling the individuals beans from the portfolio instance
  * */
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
+//@DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
 public class PortfolioItems {
 	
 	
@@ -51,13 +45,15 @@ public class PortfolioItems {
 	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable = false,  referencedColumnName = "portfolio_id")
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private Portfolio portfolio;
+	protected Portfolio portfolio;
+
+
 	
 //	priority value could bE used to set order in future sprints
 
 	@Override
 	public String toString() {
-		return "PortfolioItems [portfolioItemId=" + portfolioItemId + ", portfolio=" + portfolio + ", priority=" + "]";
+		return "PortfolioItems [portfolioItemId=" + portfolioItemId + ", portfolio=" + portfolio + "]";
 	}
 
 
