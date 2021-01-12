@@ -38,7 +38,7 @@ import lombok.NoArgsConstructor;
  *  and loosely coupling the individuals beans from the portfolio instance
  * */
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
+//@DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
 public class PortfolioItems {
 	
 	
@@ -50,7 +50,7 @@ public class PortfolioItems {
 	@JsonBackReference
 	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable = false,  referencedColumnName = "portfolio_id")
-	@JsonProperty(access = Access.READ_ONLY)
+	@JsonProperty(access = Access.AUTO)
 	private Portfolio portfolio;
 	
 //	priority value could bE used to set order in future sprints

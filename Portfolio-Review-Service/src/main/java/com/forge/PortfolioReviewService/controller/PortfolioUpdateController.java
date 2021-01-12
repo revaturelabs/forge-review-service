@@ -1,6 +1,7 @@
 package com.forge.PortfolioReviewService.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,6 +48,17 @@ public class PortfolioUpdateController {
 
 	}
 	
+	@GetMapping("/getPortfolioItemsByPortfolioId/{pid}")
+	@ApiOperation(value="Getting a specific portfolio",
+	  			  notes = "Retrieving a specific portfolio from a user to review")
+	public Optional<PortfolioItems> getAllPortfolioItemsByPortfolio(@PathVariable(value = "pid")int id) {
+		
+		System.out.println(portfolioItemsRepo.findByItemId(id));
+				
+		return portfolioItemsRepo.findById(id);
+
+	}
+	
 	//needs testing to determine whether portfolio info is necessary
 	//uniform method for updating any
 	//must pass in portfolio Id
@@ -66,14 +78,16 @@ public class PortfolioUpdateController {
 //	@ApiOperation(value="Adds new Portfolio Items",
 //	  			 notes ="Adds a new portfolioItem to a specific portfolio")
     public PortfolioItems createPortfolioItems(@PathVariable(value="id") int id ,@RequestBody PortfolioItems portfolioItem) {
-		 portfolioItem.setPortfolio(portfolioRepo.findById(id));
+		portfolioItem.setPortfolio(portfolioRepo.findById(id));
+		System.out.println(portfolioItem);
+		return portfolioItem;
 		
-		return portfolioItemsRepo.save(portfolioItem);
-
-    }
-
-
 	
+		}
+		
+
+
+	//untested
 	@DeleteMapping("/deletePortfolioItem/{id}")
 	public String deleteIndustryEquivalency(@PathVariable(value="id") int id, @RequestBody PortfolioItems portfolioItem) {
 		portfolioItemsRepo.delete(portfolioItem);
