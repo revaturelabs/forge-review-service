@@ -239,6 +239,7 @@ public class ServiceController {
 	 * ~~~~REFACTOR~~~~ Should get portfolios by user id. Input user id. Returns a
 	 * list of portfolios?
 	 */
+	
 	@GetMapping("/getPortfolios/{id}")
 	@ApiOperation(value = "Getting a specific portfolio", notes = "Retrieving a specific portfolio from a user to review")
 	public ResponseEntity<List<Portfolio>> getPortfolio(@PathVariable(value = "id") int id) {
@@ -262,6 +263,7 @@ public class ServiceController {
 		PortfolioItems portItem = portfolioItemsRepo.savePI(0, portfolioItem);
 		return portItem;
 	}
-
+	
+	
 
 }

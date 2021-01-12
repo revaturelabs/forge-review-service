@@ -33,13 +33,12 @@ public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Intege
 	
 	//findAll
 	@Query(value="SELECT * FROM portfolio_items JOIN education ON portfolio_items.portfolio_items_id = education.portfolio_items_id WHERE portfolio_items.item_type='education' AND portfolio_id=:portfolioId", nativeQuery=true)
-	public ArrayList<Education> findEdusByItemId(@Param("portfolioId") int portfolioId);
+	public ArrayList<Education> findAllEdusByPortfolioId(@Param("portfolioId") int portfolioId);
 
-//	PortfolioItems savePortfolioItems(int i, PortfolioItems portfolioItem);
+	
+	public AboutMe findById(int id); //don't think this does anything LOL
 
-	public AboutMe findById(int id);
-
-	PortfolioItems savePI(int i, PortfolioItems portfolioItem);
+	PortfolioItems savePI(int i, PortfolioItems portfolioItem); // who even knows what this does
 
 
 }
