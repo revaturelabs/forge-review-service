@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
+import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.Project;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
@@ -79,9 +80,13 @@ public class PortfolioUpdateController {
 	  			  notes = "Retrieving the about me section")
 	public AboutMe getUpdateAboutMe(@PathVariable(value="id") int id) {
 		
-		
 		return portfolioItemsRepo.findByItemId(id);
 		
+	}
+	@PutMapping(value="/updateAboutMe/{pid}", consumes= MediaType.APPLICATION_JSON_VALUE)
+	public void updateAboutMe(@PathVariable(value="pid") int id,@RequestBody AboutMe aboutMe) {
+		aboutMe.setPortfolio(portfolioRepo.findById(id));
+		portfolioItemsRepo.save(aboutMe);
 	}
 	
 	@GetMapping(value="/getProject/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
