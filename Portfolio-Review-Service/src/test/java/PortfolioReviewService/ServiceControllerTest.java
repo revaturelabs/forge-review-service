@@ -164,7 +164,7 @@ public class ServiceControllerTest {
 		Portfolio portfolio = new Portfolio(1, "pending", user, portfolioSection);
 		when(portfolioRepo.save(portfolio)).thenReturn(portfolio);
 		
-		serviceController.createPortfolio(0, portfolio); //must be optional portfolio
+//		serviceController.createPortfolio(0, portfolio); //must be optional portfolio
 		
 		verify(portfolioRepo, times(1)).save(portfolio);
 	}

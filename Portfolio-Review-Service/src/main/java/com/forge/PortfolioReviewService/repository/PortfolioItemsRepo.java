@@ -39,7 +39,7 @@ public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Intege
 
 	public AboutMe findById(int id);
 
-	PortfolioItems savePI(int i, PortfolioItems portfolioItem);
+	
 
 
 }

@@ -259,7 +259,7 @@ public class ServiceController {
 		System.out.println("Received portfolioItems " + portfolioItem);
 		Portfolio portfolio = portfolioRepo.findById(id);
 		portfolioItem.setPortfolio(portfolio);
-		PortfolioItems portItem = portfolioItemsRepo.savePI(0, portfolioItem);
+		PortfolioItems portItem = portfolioItemsRepo.save(portfolioItem);
 		return portItem;
 	}
 
