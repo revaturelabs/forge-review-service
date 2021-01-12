@@ -47,6 +47,16 @@ public class PortfolioUpdateController {
 
 	}
 	
+	@GetMapping("/getPortfolioItemsById/{id}")
+	@ApiOperation(value="Getting all portfolio items by id",
+	  notes = "Retrieving a all portfolio items by id from a user to review")
+	public List<PortfolioItems> getAllPortfolioItemsById(@PathVariable(value="id") int id) {
+		
+		
+		return portfolioItemsRepo.findAll();
+
+	}
+	
 	//needs testing to determine whether portfolio info is necessary
 	//uniform method for updating any
 	//must pass in portfolio Id
