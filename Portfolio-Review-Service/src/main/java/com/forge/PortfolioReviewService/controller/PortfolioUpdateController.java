@@ -53,15 +53,15 @@ public class PortfolioUpdateController {
 	//needs testing to determine whether portfolio info is necessary
 	//uniform method for updating any
 	//must pass in portfolio Id
-//	@PutMapping("/updatePortfolioItems/{pid}")
-//	@ApiOperation(value="Updating the Project Technology Section",
-//	  			  notes = "Updating the project technology section")
-//	public String updatePortfolioItems(@PathVariable(value = "pid")int id, @RequestBody PortfolioItems portfolioItems) {
-//		portfolioItems.setPortfolio(portfolioRepo.findById(id));
-//		portfolioItemsRepo.save(portfolioItems);
-//		System.out.println(portfolioItems);
-//		return "Success!";
-//	}
+	@PutMapping("/updatePortfolioItems/{pid}")
+	@ApiOperation(value="Updating the Project Technology Section",
+	  			  notes = "Updating the project technology section")
+	public String updatePortfolioItems(@PathVariable(value = "pid")int id, @RequestBody PortfolioItems portfolioItems) {
+		portfolioItems.setPortfolio(portfolioRepo.findById(id));
+		portfolioItemsRepo.save(portfolioItems);
+		System.out.println(portfolioItems);
+		return "Success!";
+	}
 	@GetMapping(value="/getaboutMe/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 	@ApiOperation(value="Getting the About Me",
 	  			  notes = "Retrieving the about me section")
@@ -73,9 +73,6 @@ public class PortfolioUpdateController {
 	@PutMapping(value="/updateAboutMe/{pid}", consumes= MediaType.APPLICATION_JSON_VALUE)
 	public void updateAboutMe(@PathVariable(value="pid") int id,@RequestBody AboutMe aboutMe) {
 		aboutMe.setPortfolio(portfolioRepo.findById(id));
-		//int aid = portfolioItems.getPortfolioItemId();
-		//AboutMe aboutMe = new AboutMe();
-		//aboutMe.setPortfolioItemId(aid);
 		portfolioItemsRepo.save(aboutMe);
 	}
 	
