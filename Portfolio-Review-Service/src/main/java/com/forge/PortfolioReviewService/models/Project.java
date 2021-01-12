@@ -48,7 +48,6 @@ public class Project extends PortfolioItems{
 	
 	@Column(name = "description")
 	private String description;
-
 	
 	@Column(name = "project_responsibilities")
 	private String pResponsibilities;
