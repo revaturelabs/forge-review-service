@@ -51,7 +51,7 @@ public class PortfolioItems {
 	@ManyToOne(targetEntity = Portfolio.class, cascade = CascadeType.ALL)
 	@JoinColumn(name="portfolio_id", nullable = false,  referencedColumnName = "portfolio_id")
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private Portfolio portfolio;
+	protected Portfolio portfolio;
 	
 //	priority value could bE used to set order in future sprints
 

@@ -25,6 +25,7 @@ import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.SkillMatrix;
 import com.forge.PortfolioReviewService.models.SkillMatrixItems;
 import com.forge.PortfolioReviewService.models.User;
+import com.forge.PortfolioReviewService.repository.EducationRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
@@ -44,6 +45,9 @@ public class ServiceController {
 
 	@Autowired
 	private PortfolioItemsRepo portfolioItemsRepo;
+	
+	@Autowired
+	private EducationRepo educationRepo;
 
 	/*
 	 * Gets all portfolios from the database. Returns a lists of all portfolios.
@@ -150,13 +154,29 @@ public class ServiceController {
 	public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
 		System.out.println("Create Education");
 		System.out.println(education);
-		education.setPortfolio(portfolioRepo.findById(id));
+		education.setPortfolio(portfolioRepo.getOne(id));
 		PortfolioItems portItem = education;
-
 		return portfolioItemsRepo.save(portItem);
-
 	}
 
+//	@GetMapping("/getEducationItems/{id}")
+//	public List<Education> getEducationItem(@PathVariable(value = "id") int id) {
+//		System.out.println("Get Education");
+//		Education education = portfolioItemsRepo.
+//		List<PortfolioItems> sectionList = portfolio.getPortfolioSections();
+//		List<Education> eduList = new ArrayList<Education>();
+//		
+//		
+//		
+//		for(PortfolioItems x : sectionList) {
+//			int itemId = x.getPortfolioItemId();
+//			PortfolioItems portItem = portfolioItemsRepo.getOne(itemId);
+//			//if(portItem.);
+//		}
+//		
+//		return portfolioItemsRepo.save(portItem);
+//	}
+	
 	/*
 	 * Gets portfolio by id. Input is portfolio id. Returns portfolio.
 	 */
