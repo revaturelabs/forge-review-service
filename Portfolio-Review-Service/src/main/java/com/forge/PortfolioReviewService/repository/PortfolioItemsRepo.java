@@ -15,7 +15,7 @@ import com.forge.PortfolioReviewService.models.SkillMatrix;
 
 public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Integer> {
 
-	//find one
+	//find one also these say item Id but are actually portfolioid
 	@Query(value="SELECT * FROM portfolio_items JOIN about_me ON portfolio_items.portfolio_items_id = about_me.portfolio_items_id WHERE portfolio_items.item_type='about_me' AND portfolio_id=:portfolioId", nativeQuery=true)
 	public AboutMe findByItemId(@Param("portfolioId") int portfolioId);
 	

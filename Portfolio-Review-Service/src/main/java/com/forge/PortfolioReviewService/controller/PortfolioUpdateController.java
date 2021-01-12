@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
+import com.forge.PortfolioReviewService.models.Project;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
@@ -84,6 +83,18 @@ public class PortfolioUpdateController {
 		return portfolioItemsRepo.findByItemId(id);
 		
 	}
+	
+	@GetMapping(value="/getProject/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value="Getting the About Me",
+	  			  notes = "Retrieving the about me section")
+	public Project getUpdateProject(@PathVariable(value="id") int id) {
+		
+		
+		return portfolioItemsRepo.findProjectByItemId(id);
+		
+	}
+	
+	
 	
 	@PostMapping("/createPortfolioItems/{id}")
 //	@ApiOperation(value="Adds new Portfolio Items",
