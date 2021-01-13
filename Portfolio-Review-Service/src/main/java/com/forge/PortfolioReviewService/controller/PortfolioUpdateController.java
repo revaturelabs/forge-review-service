@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
+import com.forge.PortfolioReviewService.models.SkillMatrix;
+import com.forge.PortfolioReviewService.models.SkillMatrixItems;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
+import com.forge.PortfolioReviewService.repository.SkillMatrixItemRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
 
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +38,9 @@ public class PortfolioUpdateController {
 	
 	@Autowired
 	private PortfolioItemsRepo portfolioItemsRepo; //potfolio4lyfe
+	
+	@Autowired
+	private SkillMatrixItemRepo skillMatrixItemRepo;
 	
 	
 	
@@ -73,6 +80,30 @@ public class PortfolioUpdateController {
     }
 
 
+	@PostMapping("/createSkillCategory/{id}")
+//  @ApiOperation(value="Adds new Portfolio Items",
+//                 notes ="Adds a new portfolioItem to a specific portfolio")
+	public PortfolioItems createSkillMatrixItem(@PathVariable(value = "id") int id, @RequestBody SkillMatrix skillMatrix) {
+		System.out.println("Create Skill Matrix");
+		System.out.println(skillMatrix);
+		skillMatrix.setPortfolio(portfolioRepo.getOne(id));
+		//skillMatrix.setSkillTitle(skillMatrix.getSkillTitle());
+		PortfolioItems portItem = skillMatrix;
+		PortfolioItems newPortItem = portfolioItemsRepo.save(portItem); //1 save
+		int portItemid = newPortItem.getPortfolioItemId(); //get portitemid
+		skillMatrix.setSkillMatrixId(portItemid);
+		return portfolioItemsRepo.save(skillMatrix);
+	}
+	
+	@PostMapping("/createSkill/{id}")
+	public SkillMatrixItems createSkill(@PathVariable(value = "id") int id,@RequestBody SkillMatrixItems skillMatrixItem) {
+		System.out.println("Create Skill");
+		System.out.println(skillMatrixItem);
+		skillMatrixItem.setPortfolioItems(portfolioItemsRepo.getOne(id));
+		
+		return skillMatrixItemRepo.save(skillMatrixItem);
+		
+	}
 	
 	@DeleteMapping("/deletePortfolioItem/{id}")
 	public String deleteIndustryEquivalency(@PathVariable(value="id") int id, @RequestBody PortfolioItems portfolioItem) {

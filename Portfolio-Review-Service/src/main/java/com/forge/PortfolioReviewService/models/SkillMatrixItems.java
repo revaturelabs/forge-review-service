@@ -27,9 +27,9 @@ import lombok.NoArgsConstructor;
 public class SkillMatrixItems {
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="skill_matrix_id")
+	@JoinColumn(name="portfolio_items_id")
 	@JsonBackReference(value="skillMatrix")
-	private SkillMatrix skillMatrix;
+	private PortfolioItems portfolioItems;
 	
 	@Id
 	@Column(name = "skill_matrix_item_id")
