@@ -50,13 +50,21 @@ public class ServiceController {
 	@Autowired
 	private EducationRepo educationRepo;
 
+	@GetMapping("/getAllPortfolios")
+	@ApiOperation(value="Getting all portofios",
+	  			  notes = "Retrieving all the portfolios to view them")
+	public List<Portfolio> getPortfolios(){
+		List<Portfolio> myList = portfolioRepo.findAll();
+		return myList;
+	}
+
 
 	/*
 	 * Gets all portfolios from the database. Returns a lists of all portfolios.
 	 */
 	@GetMapping("/getTest1")
 	@ApiOperation(value = "Getting all portfolios", notes = "Retrieving all the portfolios to view them")
-	public Portfolio getPortfolios() {
+	public Portfolio getTestPortfolios() {
 		AboutMe newA = new AboutMe("s", 1, 1, "all bananas");
 		PortfolioItems newE = new Education("s", 1, 1, "UGA", "May 2020", "IT", "N/A", "Bach o It");
 
