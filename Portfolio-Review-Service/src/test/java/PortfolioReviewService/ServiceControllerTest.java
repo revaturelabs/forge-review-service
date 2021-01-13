@@ -164,7 +164,7 @@ public class ServiceControllerTest {
 		Portfolio portfolio = new Portfolio(1, "pending", user, portfolioSection);
 		when(portfolioRepo.save(portfolio)).thenReturn(portfolio);
 		
-		serviceController.createPortfolio(0); //swapped this to int type mismatch possible failpoint
+		serviceController.createPortfolio(0); //swapped this to int type mismatch possible failpoin
 		
 		verify(portfolioRepo, times(1)).save(portfolio);
 	}
