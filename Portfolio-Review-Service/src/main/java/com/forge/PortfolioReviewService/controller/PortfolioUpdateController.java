@@ -58,7 +58,7 @@ public class PortfolioUpdateController {
 		@GetMapping("/getPortfolioItemsByPortfolioId/{pid}")
 		@ApiOperation(value="Getting a specific portfolio",
 		  			  notes = "Retrieving a specific portfolio from a user to review")
-		public AboutMe getAllPortfolioItemsByPortfolio(@PathVariable(value = "pid")int id) {
+		public Optional<PortfolioItems> getAllPortfolioItemsByPortfolio(@PathVariable(value = "pid")int id) {
 			
 			System.out.println(portfolioItemsRepo.findByItemId(id));
 					
