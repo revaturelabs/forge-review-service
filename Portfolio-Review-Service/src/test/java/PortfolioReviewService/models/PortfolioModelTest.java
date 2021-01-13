@@ -1,53 +1,60 @@
 package PortfolioReviewService.models;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import com.forge.PortfolioReviewService.PortfolioReviewServiceApplication;
+import com.forge.PortfolioReviewService.models.AboutMe;
+import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.Portfolio;
+import com.forge.PortfolioReviewService.models.PortfolioItems;
 
+@SpringBootTest(classes = PortfolioReviewServiceApplication.class)
 class PortfolioModelTest {
+    
+     // test build PortfolioItems list of different PI.
+    @Test
+    void portfolioItemTest() {
 
-	private Portfolio buildPortfolio() {
-		Portfolio p = new Portfolio();
-		p.setId(1);
-		p.setBelongsTo("Annie");
-		p.setStatus("Pending");
-		p.setAboutMe(null);
-		p.setEducation(null);
-		p.setIndustryEquivalency(null);
-		p.setMyUser(null);
-		p.setProjects(null);
-		p.setSkillMatrix(null);
-		
-		return p;
-	}
-	
-	@Test
-	public void testProperties() {
-		Portfolio p = buildPortfolio();
-		
-		Assertions.assertEquals(1,p.getId());
-		Assertions.assertEquals("Annie",p.getBelongsTo());
-		Assertions.assertEquals("Pending",p.getStatus());
-		Assertions.assertEquals(null,p.getAboutMe());
-		Assertions.assertEquals(null,p.getEducation());
-		Assertions.assertEquals(null,p.getIndustryEquivalency());
-		Assertions.assertEquals(null,p.getMyUser());
-		Assertions.assertEquals(null,p.getProjects());
-		Assertions.assertEquals(null,p.getSkillMatrix());
-		
-	}
-	
-	@Test
-	public void hasCodeTest() {
-		Portfolio p = buildPortfolio();
-		int result = p.hashCode();
+        AboutMe am = new AboutMe();
 
-		Assertions.assertEquals(-2035465018,result);
+        Education e1 = new Education();
+        Education e2 = new Education();
+        List<PortfolioItems> pIList = new ArrayList<PortfolioItems>();
+        pIList.add(e1);
+        pIList.add(e2);
+        pIList.add(am);
 
-	}
-	
+        assertEquals(3, pIList.size());
+    }
+
+    //Review
+    @Test
+   void buildLooselyCoupledPortfolioTest() { 
+        Portfolio p = new Portfolio();
+        p.setId(1);
+        p.setStatus("Pending");
+        Education ed1 = new Education();
+        ed1.setPortfolioItemId(1);
+        ed1.setPriority(1);
+        ed1.setItemType("Education");
+
+        Education ed2 = new Education();
+        ed2.setPortfolioItemId(1);
+        ed2.setPriority(1);
+        ed2.setItemType("Education");
+        List<PortfolioItems> edList = new ArrayList<PortfolioItems>();
+        edList.add(ed1);
+        edList.add(ed2);
+               // PortfolioItems educationItems = new PortfolioItems(1, 1, 1, "Education", edList);
+        p.setPortfolioSections(edList);
+               assertEquals(2,p.getPortfolioSections().size());
+        assertEquals(p.getPortfolioSections().get(0), ed1);
+    }
 
 }

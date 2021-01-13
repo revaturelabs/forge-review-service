@@ -1,7 +1,6 @@
 package com.forge.PortfolioReviewService.models;
 
-import java.util.Set;
-
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,14 +28,6 @@ import lombok.NoArgsConstructor;
 @Generated()
 public class User {
 
-	public User(int userId, String email, String password, String firstName, String lastName) {
-		super();
-		this.userId = userId;
-		this.email = email;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 
 	@Id
 	@Column(name = "user_id")
@@ -55,10 +46,18 @@ public class User {
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
-	@Column(name = "is_Admin", nullable = false)
+	@Column(name = "is_Admin", nullable = false, columnDefinition="BOOLEAN DEFAULT false")
 	private boolean isAdmin;
 	
-	@JsonManagedReference(value="myUser")
-	@OneToMany(mappedBy = "myUser")
-	private Set<Portfolio> portfolios;
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", targetEntity=Portfolio.class)
+	private List<Portfolio> portfolios;
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", email=" + email + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", isAdmin=" + isAdmin + "]";
+	}
+	
+	
 }

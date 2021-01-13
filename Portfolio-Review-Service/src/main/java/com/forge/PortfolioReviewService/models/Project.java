@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -25,33 +27,33 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name="P")
 @Table(name = "project")
-@EqualsAndHashCode(exclude = {"projectResponsibilities", "projectTechnologies"})
-@Generated()
-public class Project {
-
-	@Id
+@EqualsAndHashCode
+@DiscriminatorValue(value="project")
+public class Project extends PortfolioItems{
+	
+	@Column(name = "item_type")
+	private String itemType= "Project";
+	
 	@Column(name = "project_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int projectId;
+
+	@Column(name = "priority", columnDefinition = "int DEFAULT 5")
+	private int priority;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "project_name")
+	private String projectName;
 	
 	@Column(name = "description")
 	private String description;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="portfolio_id", nullable=false)
-	@JsonBackReference(value="projectPortfolio")
-	private Portfolio portfolio;
+	@Column(name = "project_responsibilities")
+	private String projectResponsibilities;
 	
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	@JsonManagedReference(value="responsibilitiesPortfolio")
-	private Set<ProjectResponsibilities> projectResponsibilities;
+	@Column(name = "project_tech")
+	private String projectTech;
 	
-	@OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-	@JsonManagedReference(value="technologiesPortfolio")
-	private Set<ProjectTechnologies> projectTechnologies;
+
 }

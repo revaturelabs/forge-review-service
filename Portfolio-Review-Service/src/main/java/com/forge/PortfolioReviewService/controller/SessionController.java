@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.forge.PortfolioReviewService.models.Message;
 import com.forge.PortfolioReviewService.models.User;
 
 
@@ -20,7 +18,7 @@ import com.forge.PortfolioReviewService.models.User;
 @CrossOrigin(origins="http://localhost:4200")
 public class SessionController {
 	
-	@PostMapping(value="/login", produces = "application/json")
+	@PostMapping(value="/login", consumes = "application/json")
 	public @ResponseBody User login(HttpServletRequest req, @RequestBody User U) {
 		
 		HttpSession ses= req.getSession();
@@ -30,10 +28,10 @@ public class SessionController {
 	}
 	
 	@GetMapping(value="/logout", produces = "application/json")
-	public @ResponseBody Message logout(HttpSession ses) {
+	public @ResponseBody String logout(HttpSession ses) {
 		
 		ses.invalidate();
-		return new Message("You've successfully logged out");
+		return "You've successfully logged out";
 	}
 	
 	@GetMapping(value="/loggers")
