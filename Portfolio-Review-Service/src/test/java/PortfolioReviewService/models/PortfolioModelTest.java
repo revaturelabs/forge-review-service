@@ -1,25 +1,23 @@
 package PortfolioReviewService.models;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.groovy.syntax.Reduction;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import com.forge.PortfolioReviewService.PortfolioReviewServiceApplication;
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
-import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 import com.forge.PortfolioReviewService.models.Portfolio;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
-import com.forge.PortfolioReviewService.models.Project;
-import com.forge.PortfolioReviewService.models.SkillMatrix;
 
+@SpringBootTest(classes = PortfolioReviewServiceApplication.class)
 class PortfolioModelTest {
-	
-	 // test build PortfolioItems list of different PI.
+    
+     // test build PortfolioItems list of different PI.
     @Test
     void portfolioItemTest() {
 

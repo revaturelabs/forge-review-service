@@ -20,7 +20,7 @@ public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Intege
 
 	//find one also these say item Id but are actually portfolioid
 	
-	public AboutMe findById(int id); //don't think this does anything LOL
+	//public AboutMe findById(int id); //don't think this does anything LOL
 	
 	@Query(value="SELECT * FROM portfolio_items JOIN about_me ON portfolio_items.portfolio_items_id = about_me.portfolio_items_id WHERE portfolio_items.item_type='about_me' AND portfolio_id=:portfolioId", nativeQuery=true)
 	public AboutMe findByItemId(@Param("portfolioId") int portfolioId);
@@ -46,5 +46,4 @@ public interface PortfolioItemsRepo extends JpaRepository<PortfolioItems, Intege
 	
 	@Query(value="SELECT * FROM portfolio_items JOIN project ON portfolio_items.portfolio_items_id = project.portfolio_items_id WHERE portfolio_items.item_type='project' AND portfolio_id=:portfolioId", nativeQuery=true)
 	public Project[] findByProjectItemId(@Param("portfolioId") int portfolioId);
-
 }

@@ -150,47 +150,11 @@ public class ServiceController {
 		portfolioRepo.save(portfolio);
 	}
 
-	@PostMapping("/createEducationItem/{id}")
-  @ApiOperation(value="Adds new Portfolio Education Item",
-                 notes ="Adds a new portfolioItem to a specific portfolio")
-	public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
-		System.out.println("Create Education");
-		System.out.println(education);
-		education.setPortfolio(portfolioRepo.getOne(id));
-		PortfolioItems portItem = education;
-		return portfolioItemsRepo.save(portItem);
-	}
-
-	@PostMapping("/createIndustryItem/{id}")
-  @ApiOperation(value="Adds new Portfolio Industry Item",
-  				notes ="Adds a new portfolioItem to a specific portfolio")
-	public PortfolioItems createIndustryItem(@PathVariable(value = "id") int id, @RequestBody IndustryEquivalency industry) {
-		System.out.println("Create Industry");
-		System.out.println(industry);
-		industry.setPortfolio(portfolioRepo.getOne(id));
-		PortfolioItems portItem = industry;
-		return portfolioItemsRepo.save(portItem);
-	}
+	
 	
 	
 
-//	@GetMapping("/getEducationItems/{id}")
-//	public List<Education> getEducationItem(@PathVariable(value = "id") int id) {
-//		System.out.println("Get Education");
-//		Education education = portfolioItemsRepo.
-//		List<PortfolioItems> sectionList = portfolio.getPortfolioSections();
-//		List<Education> eduList = new ArrayList<Education>();
-//		
-//		
-//		
-//		for(PortfolioItems x : sectionList) {
-//			int itemId = x.getPortfolioItemId();
-//			PortfolioItems portItem = portfolioItemsRepo.getOne(itemId);
-//			//if(portItem.);
-//		}
-//		
-//		return portfolioItemsRepo.save(portItem);
-//	}
+
 
 	/*
 	 * Gets portfolio by id. Input is portfolio id. Returns portfolio.
@@ -234,8 +198,8 @@ public class ServiceController {
 		
 		portfolioRepo.save(portfolio);
 		int pid = portfolio.getId();
-		AboutMe newA = new AboutMe("AboutMe",1 ,1 , "testing");
-		PortfolioItems newE = new Education("Education",1, 1," ", " "," ", " ", " ");
+		AboutMe newA = new AboutMe("AboutMe",1 ,1 , " ");
+		PortfolioItems newE = new Education("Education", 1 , 1," ", " "," ", " ", " ");
 		List<SkillMatrixItems> newSMIL = new ArrayList<SkillMatrixItems>();
 	    SkillMatrix newSM = new SkillMatrix("Skills", 1, 1, "sick tricks", newSMIL);
 	    SkillMatrixItems newMI = new SkillMatrixItems(newSM,1,"YER","5");
@@ -244,9 +208,9 @@ public class ServiceController {
 		newE.setPortfolio(portfolioRepo.findById(pid));
 		newSM.setPortfolio(portfolioRepo.findById(pid));
 		List<PortfolioItems> PI = new ArrayList<PortfolioItems>();
-		PI.add(newSM);
+		//PI.add(newSM);
 		PI.add(newA);
-		PI.add(newE);
+		//PI.add(newE);
 		portfolioRepo.findById(pid).setPortfolioSections(PI);
 		portfolioRepo.save(portfolioRepo.findById(pid));
 

@@ -2,7 +2,6 @@ package com.forge.PortfolioReviewService.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -76,15 +75,6 @@ public class PortfolioUpdateController {
 		}
 		
 		
-		@GetMapping(value="/getProject/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
-		@ApiOperation(value="Getting the About Me",
-		  			  notes = "Retrieving the about me section")
-		public Project getUpdateProject(@PathVariable(value="id") int id) {
-			
-			
-			return portfolioItemsRepo.findProjectByItemId(id);
-			
-		}
 		
 		@GetMapping("/getPortfolioItemsById/{id}")
 		@ApiOperation(value="Getting all portfolio items by id",
@@ -114,32 +104,27 @@ public class PortfolioUpdateController {
 			for(Project x : ie) {
 				System.out.println(x);
 			}
-			return portfolioItemsRepo.findByProjectItemId(id);
+			//return portfolioItemsRepo.findByProjectItemId(id);
+			return ie;
+
 
 		}
 
 	
 	//POSTS
 	
+
 		@PostMapping("/createEducationItem/{id}")
-		@ApiOperation(value = "Adds new Portfolio Education Item", notes = "Adds a new portfolioItem to a specific portfolio")
-		public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
-			System.out.println("Create Education");
-			System.out.println(education);
-			education.setPortfolio(portfolioRepo.getOne(id));
-			PortfolioItems portItem = education;
-			return portfolioItemsRepo.save(portItem);
-		}
-		
-		@PostMapping("/createProjectItem/{id}")
-//  	@ApiOperation(value="Adds new Portfolio Items",
-//	                 notes ="Adds a new project to a specific portfolio")
-		public PortfolioItems createProjectItem(@PathVariable(value = "id") int id, @RequestBody Project project) {
-			project.setPortfolio(portfolioRepo.getOne(id));
-			PortfolioItems portItem = project;
-			System.out.println("createProjectItem project = " + project);
-			return portfolioItemsRepo.save(portItem);
-		}
+		  @ApiOperation(value="Adds new Portfolio Education Item",
+		                 notes ="Adds a new portfolioItem to a specific portfolio")
+			public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
+				System.out.println("Create Education");
+				System.out.println(education);
+				education.setPortfolio(portfolioRepo.getOne(id));
+				PortfolioItems portItem = education;
+				return portfolioItemsRepo.save(portItem);
+			}
+
 		
 		@PostMapping("/createPortfolioItems/{id}")
 //		@ApiOperation(value="Adds new Portfolio Items",
@@ -151,40 +136,10 @@ public class PortfolioUpdateController {
 			return portfolioItemsRepo.save(portfolioItem);
 
 		}
-
-
-	
-	//PUTS
-	
-		// needs testing to determine whether portfolio info is necessary
-		// uniform method for updating any
-		// must pass in portfolio Id
-		@PutMapping("/updatePortfolioItems/{pid}")
-		@ApiOperation(value = "Updating the Project Technology Section", notes = "Updating the project technology section")
-		public String updatePortfolioItems(@PathVariable(value = "pid") int id,
-				@RequestBody PortfolioItems portfolioItems) {
-			portfolioItems.setPortfolio(portfolioRepo.findById(id));
-			portfolioItemsRepo.save(portfolioItems);
-			System.out.println(portfolioItems);
-			return "Success!";
-		}
-		
-		
-		@PutMapping(value="/updateProject/{pid}", consumes= MediaType.APPLICATION_JSON_VALUE)
-		public void updateProject(@PathVariable(value="pid") int id,@RequestBody Project project) {
-			project.setPortfolio(portfolioRepo.findById(id));
-			portfolioItemsRepo.save(project);
-		}
-		
-		
-		@PutMapping(value = "/updateAboutMe/{pid}", consumes = MediaType.APPLICATION_JSON_VALUE)
-		public void updateAboutMe(@PathVariable(value = "pid") int id, @RequestBody AboutMe aboutMe) {
-			aboutMe.setPortfolio(portfolioRepo.findById(id));
-			portfolioItemsRepo.save(aboutMe);
-		}
 		
 		@PostMapping("/updateIndustryItem/{pid}")
-		@ApiOperation(value = "Adds new Portfolio Industry Item", notes = "Adds a new portfolioItem to a specific portfolio")
+		@ApiOperation(value = "Adds new Portfolio Industry Item", 
+		notes = "Adds a new portfolioItem to a specific portfolio")
 		public void updateIndustryItem(@PathVariable(value = "pid") int id, @RequestBody IndustryEquivalency[] industry) {
 			for(IndustryEquivalency x : industry) {
 				x.setPortfolio(portfolioRepo.findById(id));
@@ -206,6 +161,33 @@ public class PortfolioUpdateController {
 		}
 
 	
+	//PUTS
+	
+		// needs testing to determine whether portfolio info is necessary
+		// uniform method for updating any
+		// must pass in portfolio Id
+		@PutMapping("/updatePortfolioItems/{pid}")
+		@ApiOperation(value = "Updating the Project Technology Section", notes = "Updating the project technology section")
+		public String updatePortfolioItems(@PathVariable(value = "pid") int id,
+				@RequestBody PortfolioItems portfolioItems) {
+			portfolioItems.setPortfolio(portfolioRepo.findById(id));
+			portfolioItemsRepo.save(portfolioItems);
+			System.out.println(portfolioItems);
+			return "Success!";
+		}
+		
+		
+
+		
+		@PutMapping(value = "/updateAboutMe/{pid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+		public void updateAboutMe(@PathVariable(value = "pid") int id, @RequestBody AboutMe aboutMe) {
+			aboutMe.setPortfolio(portfolioRepo.findById(id));
+			portfolioItemsRepo.save(aboutMe);
+		}
+		
+	
+
+	
 	//DELETE
 
 	@DeleteMapping("/deletePortfolioItem/{id}")
@@ -214,6 +196,7 @@ public class PortfolioUpdateController {
 		portfolioItemsRepo.delete(portfolioItem);
 		return "Success!";
 	}
+
 
 
 }

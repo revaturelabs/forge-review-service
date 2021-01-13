@@ -2,6 +2,8 @@ package com.forge.PortfolioReviewService.models;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +34,7 @@ import lombok.NoArgsConstructor;
  *  and loosely coupling the individuals beans from the portfolio instance
  * */
 @Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
+@DiscriminatorColumn(name = "ITEM_TYPE", discriminatorType = DiscriminatorType.STRING) //prevents wrong type exception
 public class PortfolioItems {
 	
 	
