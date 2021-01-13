@@ -39,22 +39,20 @@ public class SkillMatrix extends PortfolioItems {
 	
 	@Column(name = "skill_matrix_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	
+	private int skillMatrixId;
 	
 	@Column(name = "priority")
 	@ColumnDefault(value="4")
 	private int priority;
 
-
 	@Column(name = "skill_title")
 	private String skillTitle;
 
 	// may be the root cause of the delete by order issue
-	@OneToMany(mappedBy = "skillMatrix", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "portfolioItems", cascade = CascadeType.ALL)
 	@JsonManagedReference(value = "skillMatrix")
 	@ElementCollection
-	@CollectionTable(name="skill_matrix_items",  joinColumns=@JoinColumn(name="skill_matrix_id"))
+	@CollectionTable(name="skill_matrix_items",  joinColumns=@JoinColumn(name="portfolio_items_id"))
 	private List<SkillMatrixItems> skillMatrixItem;
 
 //	@Override
