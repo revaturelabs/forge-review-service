@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity(name="IE")
 @Table(name = "industry_equivalency")
-@DiscriminatorValue(value="IE")
+@DiscriminatorValue(value="industry_equivalency")
 public class IndustryEquivalency extends PortfolioItems{
 	
 	@Column(name = "item_type")
@@ -39,13 +39,6 @@ public class IndustryEquivalency extends PortfolioItems{
 	
 	@Column(name = "technology")
 	private String technology;
-	
-
-//	@Override
-//	public String toString() {
-//		return "IndustryEquivalency [id=" + portfolioItemsId + ", months=" + months + ", technology=" + technology
-//				+ ", portfolioItemsId=" + portfolioItemsId + "]";
-//	}
 	
 	
 	

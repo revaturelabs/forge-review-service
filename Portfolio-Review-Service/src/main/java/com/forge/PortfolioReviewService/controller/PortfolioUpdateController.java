@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.Portfolio;
+import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
 import com.forge.PortfolioReviewService.models.Project;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
@@ -39,13 +40,16 @@ public class PortfolioUpdateController {
 	@Autowired
 	private PortfolioItemsRepo portfolioItemsRepo; //potfolio4lyfe
 	
+
+
 	
-	//GETS
+	//GET
 	
 	// utility method for testing persistence
 	@GetMapping("/getAllPortfolioItems")
 	@ApiOperation(value = "Getting a specific portfolio", notes = "Retrieving a specific portfolio from a user to review")
 	public List<PortfolioItems> getAllPortfolioItems() {
+
 
 
 			return portfolioItemsRepo.findAll();
@@ -71,6 +75,7 @@ public class PortfolioUpdateController {
 			
 		}
 		
+		
 		@GetMapping(value="/getProject/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
 		@ApiOperation(value="Getting the About Me",
 		  			  notes = "Retrieving the about me section")
@@ -90,23 +95,44 @@ public class PortfolioUpdateController {
 			return portfolioItemsRepo.findAll();
 
 		}
+
+		@GetMapping(value = "/getIndustryItems/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+		@ApiOperation(value = "Getting the Industry Equivalency", notes = "Retrieving the IndustryEquivalency section")
+		public IndustryEquivalency[] getUpdateIndustryEquivalency(@PathVariable(value = "id") int id) {
+			IndustryEquivalency[] ie = portfolioItemsRepo.findByIndustryItemId(id);
+			for(IndustryEquivalency x : ie) {
+				System.out.println(x);
+			}
+			return portfolioItemsRepo.findByIndustryItemId(id);
+
+		}
+		
+		@GetMapping(value = "/getProjectItems/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+		@ApiOperation(value = "Getting the Project", notes = "Retrieving the portfolio section section")
+		public Project[] getUpdateProjectItems(@PathVariable(value = "id") int id) {
+			Project[] ie = portfolioItemsRepo.findByProjectItemId(id);
+			for(Project x : ie) {
+				System.out.println(x);
+			}
+			return portfolioItemsRepo.findByProjectItemId(id);
+
+		}
+
 	
 	//POSTS
 	
 		@PostMapping("/createEducationItem/{id}")
-//		@ApiOperation(value="Adds new Portfolio Items",
-//		  			 notes ="Adds a new portfolioItem to a specific portfolio")
-	    public PortfolioItems createEducationItem(@PathVariable(value="id") int id, @RequestBody Education education) {
-			education.setItemType("Education");
-			education.setPortfolio(portfolioRepo.findById(id));
+		@ApiOperation(value = "Adds new Portfolio Education Item", notes = "Adds a new portfolioItem to a specific portfolio")
+		public PortfolioItems createEducationItem(@PathVariable(value = "id") int id, @RequestBody Education education) {
+			System.out.println("Create Education");
+			System.out.println(education);
+			education.setPortfolio(portfolioRepo.getOne(id));
 			PortfolioItems portItem = education;
-		
 			return portfolioItemsRepo.save(portItem);
-
-	    }
+		}
 		
 		@PostMapping("/createProjectItem/{id}")
-	//  @ApiOperation(value="Adds new Portfolio Items",
+//  	@ApiOperation(value="Adds new Portfolio Items",
 //	                 notes ="Adds a new project to a specific portfolio")
 		public PortfolioItems createProjectItem(@PathVariable(value = "id") int id, @RequestBody Project project) {
 			project.setPortfolio(portfolioRepo.getOne(id));
@@ -126,12 +152,13 @@ public class PortfolioUpdateController {
 
 		}
 
+
 	
 	//PUTS
 	
-		//needs testing to determine whether portfolio info is necessary
-		//uniform method for updating any
-		//must pass in portfolio Id
+		// needs testing to determine whether portfolio info is necessary
+		// uniform method for updating any
+		// must pass in portfolio Id
 		@PutMapping("/updatePortfolioItems/{pid}")
 		@ApiOperation(value = "Updating the Project Technology Section", notes = "Updating the project technology section")
 		public String updatePortfolioItems(@PathVariable(value = "pid") int id,
@@ -142,17 +169,42 @@ public class PortfolioUpdateController {
 			return "Success!";
 		}
 		
-		@PutMapping(value="/updateAboutMe/{pid}", consumes= MediaType.APPLICATION_JSON_VALUE)
-		public void updateAboutMe(@PathVariable(value="pid") int id,@RequestBody AboutMe aboutMe) {
-			aboutMe.setPortfolio(portfolioRepo.findById(id));
-			portfolioItemsRepo.save(aboutMe);
-		}
 		
 		@PutMapping(value="/updateProject/{pid}", consumes= MediaType.APPLICATION_JSON_VALUE)
 		public void updateProject(@PathVariable(value="pid") int id,@RequestBody Project project) {
 			project.setPortfolio(portfolioRepo.findById(id));
 			portfolioItemsRepo.save(project);
 		}
+		
+		
+		@PutMapping(value = "/updateAboutMe/{pid}", consumes = MediaType.APPLICATION_JSON_VALUE)
+		public void updateAboutMe(@PathVariable(value = "pid") int id, @RequestBody AboutMe aboutMe) {
+			aboutMe.setPortfolio(portfolioRepo.findById(id));
+			portfolioItemsRepo.save(aboutMe);
+		}
+		
+		@PostMapping("/updateIndustryItem/{pid}")
+		@ApiOperation(value = "Adds new Portfolio Industry Item", notes = "Adds a new portfolioItem to a specific portfolio")
+		public void updateIndustryItem(@PathVariable(value = "pid") int id, @RequestBody IndustryEquivalency[] industry) {
+			for(IndustryEquivalency x : industry) {
+				x.setPortfolio(portfolioRepo.findById(id));
+				portfolioItemsRepo.save(x);
+				System.out.println(x);
+			}
+		}
+		
+		@PostMapping("/updateProjectItem/{id}")
+		@ApiOperation(value = "Adds new Portfolio Project Item", notes = "Adds a new portfolioItem to a specific portfolio")
+		public void updateProjectItem(@PathVariable(value = "id") int id, @RequestBody Project[] project) {
+			System.out.println("Create project");
+			System.out.println(project);
+			for(Project x : project) {
+				x.setPortfolio(portfolioRepo.findById(id));
+				portfolioItemsRepo.save(x);
+				System.out.println(x);
+			}
+		}
+
 	
 	//DELETE
 

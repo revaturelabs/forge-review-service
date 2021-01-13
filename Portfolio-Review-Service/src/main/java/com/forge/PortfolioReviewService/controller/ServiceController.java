@@ -196,12 +196,14 @@ public class ServiceController {
 	 * Gets portfolio by id. Input is portfolio id. Returns portfolio.
 	 */
 
-	// trying something new this works
-	@GetMapping(value = "/getUser/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Optional<User> getUserById(@PathVariable(value = "id") int id) {
-		Optional<User> user = userRepo.findById(id);
-		return user;
-	}
+
+	//trying something new this works 
+//	@GetMapping(value="/getUser/{id}", produces= MediaType.APPLICATION_JSON_VALUE)
+//	public Optional<User> getUserById(@PathVariable(value="id") int id) {
+//		Optional<User> user = userRepo.findById(id);
+//		return user;
+//	}
+//	
 
 //
 	@GetMapping("/getPortfolioByID/{id}")
