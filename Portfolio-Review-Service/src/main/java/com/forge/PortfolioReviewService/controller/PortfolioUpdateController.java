@@ -18,6 +18,7 @@ import com.forge.PortfolioReviewService.models.AboutMe;
 import com.forge.PortfolioReviewService.models.Education;
 import com.forge.PortfolioReviewService.models.IndustryEquivalency;
 import com.forge.PortfolioReviewService.models.PortfolioItems;
+import com.forge.PortfolioReviewService.models.Project;
 import com.forge.PortfolioReviewService.repository.PortfolioItemsRepo;
 import com.forge.PortfolioReviewService.repository.PortfolioRepo;
 import com.forge.PortfolioReviewService.repository.UserRepo;
@@ -99,6 +100,29 @@ public class PortfolioUpdateController {
 	@ApiOperation(value = "Adds new Portfolio Industry Item", notes = "Adds a new portfolioItem to a specific portfolio")
 	public void updateIndustryItem(@PathVariable(value = "pid") int id, @RequestBody IndustryEquivalency[] industry) {
 		for(IndustryEquivalency x : industry) {
+			x.setPortfolio(portfolioRepo.findById(id));
+			portfolioItemsRepo.save(x);
+			System.out.println(x);
+		}
+	}
+	
+	@GetMapping(value = "/getProjectItems/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Getting the Project", notes = "Retrieving the portfolio section section")
+	public Project[] getUpdateProjectItems(@PathVariable(value = "id") int id) {
+		Project[] ie = portfolioItemsRepo.findByProjectItemId(id);
+		for(Project x : ie) {
+			System.out.println(x);
+		}
+		return portfolioItemsRepo.findByProjectItemId(id);
+
+	}
+
+	@PostMapping("/updateProjectItem/{id}")
+	@ApiOperation(value = "Adds new Portfolio Project Item", notes = "Adds a new portfolioItem to a specific portfolio")
+	public void updateProjectItem(@PathVariable(value = "id") int id, @RequestBody Project[] project) {
+		System.out.println("Create project");
+		System.out.println(project);
+		for(Project x : project) {
 			x.setPortfolio(portfolioRepo.findById(id));
 			portfolioItemsRepo.save(x);
 			System.out.println(x);

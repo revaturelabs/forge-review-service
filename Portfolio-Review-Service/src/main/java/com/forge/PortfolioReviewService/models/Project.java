@@ -30,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Entity(name="P")
 @Table(name = "project")
 @EqualsAndHashCode
-@DiscriminatorValue(value="P")
+@DiscriminatorValue(value="project")
 public class Project extends PortfolioItems{
 	
 	@Column(name = "item_type")
@@ -38,23 +38,23 @@ public class Project extends PortfolioItems{
 	
 	@Column(name = "project_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int projectId;
 
 	@Column(name = "priority", columnDefinition = "int DEFAULT 5")
 	private int priority;
 	
 	@Column(name = "project_name")
-	private String pName;
+	private String projectName;
 	
 	@Column(name = "description")
 	private String description;
 
 	
 	@Column(name = "project_responsibilities")
-	private String pResponsibilities;
+	private String projectResponsibilities;
 	
 	@Column(name = "project_tech")
-	private String pTech;
+	private String projectTech;
 	
 
 }
